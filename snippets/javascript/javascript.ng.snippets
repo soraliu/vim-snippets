@@ -1,0 +1,56 @@
+# ----------------------ajax-------------------------
+snippet ng-fetch-require
+	define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
+
+		app.factory('${1}', function(ajax) {
+			let service = {};
+
+			service.${2} = (${3:data}) => {
+				let config = api.${4};
+				config.${5:params:data} = data;
+				return ajax.request(config);
+			};
+
+			return service;
+		});
+
+	});
+snippet ng-fetch-service
+	${1:service}.${2} = (${3:data}) => {
+		let config = api.${4};
+		config.${5:params:data} = data;
+		return ajax.request(config);
+	}
+snippet ng-ds-ajax
+	async ${1}() {
+		try {
+			await ${2};
+		} catch(e) {
+			$notify.error(e.message);
+			throw e;
+		}
+	},
+
+
+# ----------------------modal-------------------------
+snippet ng-modal "$uibModal"
+	let model = $uibModal.open({
+		animation: true,
+		templateUrl: '${1:modal.html}',
+		controller: function($scope) {
+			$scope.header = ${2:''};
+			$scope.onClickOk = () => {
+				$uibModalInstance.close('ok');
+			};
+			$scope.onClickCancel = () => {
+				$uibModalInstance.dismiss('cancel');
+			};
+		},
+		resolve: {
+			// 数据需要以函数形式传递，不然会报错
+			${3:data: () => data}
+		}
+	})
+		.result
+		.then(${4});
+
