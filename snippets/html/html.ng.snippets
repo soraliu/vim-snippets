@@ -1,3 +1,74 @@
+# ----------------------bootstrap-------------------------
+snippet bs-form-inline
+	<div class="form">
+		<div class="form-group">
+			<label>${1}</label>
+			<input class="form-control" type="${2:text}">
+		</div>
+	</div>
+snippet bs-form-input-group
+	<div class="input-group">
+		<div class="input-group-btn">
+			${1}
+		</div>
+		<input class="form-control" type="text" />
+	</div>
+snippet bs-form-dropdown
+	<div class="dropdown">
+		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+			${1}
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li><a>${2}</a></li>
+		</ul>
+	</div>
+snippet bs-form-date-time-picker
+	<!--
+		requirejs:
+		'styles/i18n//bootstrap-datetimepicker.zh-CN',
+		'angular-bootstrap-datetimepicker',
+		'angular-bootstrap-datetimepicker-templates',
+		'angular-date-time-input',
+	-->
+	<div class="dropdown">
+		<a class="dropdown-toggle" id="${3:dateTime}" data-toggle="dropdown" data-target="#">
+			<input type="text" class="form-control"
+				data-date-time-input="YYYY-MM-DD HH:mm:ss"
+				data-ng-model="${1}"
+				placeholder="${2}" required
+			>
+		</a>
+		<ul class="dropdown-menu">
+			<datetimepicker
+				data-ng-model="$1"
+				data-datetimepicker-config="{ dropdownSelector: '#$3', startView: 'day', minView: 'minute'}"
+			></datetimepicker>
+		</ul>
+	</div>
+
+
+# ----------------------petkit-------------------------
+snippet petkit-content
+	<div fill-height>
+		<section class="content-header">
+			<h1>${1}</h1>
+		</section>
+		<section class="content">
+			${0}
+		</section>
+	</div>
+snippet petkit-box
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title">${1}</h3>
+		</div>
+		<div class="box-body">
+			${0}
+		</div>
+	</div>
+
+
 # ----------------------form-------------------------
 snippet ng-select
 	<select class="${1:form-control}" ${2:ng-change=""} ng-model="${3}" ng-options="select.${5} as select.${6} for select in ${4}"></select>
@@ -9,6 +80,12 @@ snippet ng-ui-select
 		<ui-select-choices repeat="item in ${5:[]}">
 		</ui-select-choices>
 	</ui-select>
+snippet ng-switch
+	<!--
+		require: 
+		define-switch
+	-->
+	<switch ng-model="${0}" class="green"></switch>
 
 
 

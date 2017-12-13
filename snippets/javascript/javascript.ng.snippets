@@ -1,5 +1,24 @@
-# ----------------------ajax-------------------------
-snippet ng-fetch-require
+# ----------------------require-------------------------
+snippet define-notify
+	'angular-ui-notification',
+snippet define-datetime
+	'styles/i18n//bootstrap-datetimepicker.zh-CN',
+	'angular-bootstrap-datetimepicker',
+	'angular-bootstrap-datetimepicker-templates',
+	'angular-date-time-input',
+snippet define-switch
+	'angular-ui-switch',
+snippet define-ui-select
+	'ui-select',
+
+
+snippet require-ng-controller
+	define(['app'], function(app) {
+		app.controller('${1}', function($scope) {
+			${0}
+		});
+	});
+snippet require-ng-fetch
 	define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
 
 		app.factory('${1}', function(ajax) {
@@ -15,6 +34,8 @@ snippet ng-fetch-require
 		});
 
 	});
+
+# ----------------------ajax-------------------------
 snippet ng-fetch-service
 	${1:service}.${2} = (${3:data}) => {
 		let config = api.${4};
@@ -26,10 +47,25 @@ snippet ng-ds-ajax
 		try {
 			await ${2};
 		} catch(e) {
-			$notify.error(e.message);
+			$notify.error(e.message || (e.error && e.error.message));
 			throw e;
 		}
 	},
+
+# ----------------------directive-------------------------
+snippet ng-directive
+	app.directive('${1}', function() {
+		return {
+			restrict: 'E',
+			scope: {
+				${2}
+			},
+			controller: function($scope) {
+				${3}
+			},
+			templateUrl: '${4}'
+		};
+	});
 
 
 # ----------------------modal-------------------------
@@ -53,4 +89,31 @@ snippet ng-modal "$uibModal"
 	})
 		.result
 		.then(${4});
+
+
+snippet ng-table-ext
+	$scope.table = {
+		${1}: {
+			setting: {
+				table: {
+					${2:searchable: false},
+					${3:columnable: false},
+					${4:count: 10},
+					${5:counts: [10, 20, 50, 100]},
+					cols: [{
+						${6}
+					}],
+					getData: function(params) {
+						let promise = fn.searchUser({page: params.page(), count: params.count()}).then(users => {
+							params.total(users.total);
+							return users.items;
+						}).catch(e => {
+							console.log(e);
+						});
+						return promise;
+					}
+				},
+			},
+		},
+	};
 
