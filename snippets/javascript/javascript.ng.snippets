@@ -1,19 +1,24 @@
 # ----------------------require-------------------------
 snippet define-notify
 	'angular-ui-notification',
-snippet define-datetime
+snippet define-datetime-input
 	'styles/i18n//bootstrap-datetimepicker.zh-CN',
 	'angular-bootstrap-datetimepicker',
 	'angular-bootstrap-datetimepicker-templates',
 	'angular-date-time-input',
+snippet define-datetime-duration
+	'duration-picker',
 snippet define-switch
 	'angular-ui-switch',
 snippet define-ui-select
 	'ui-select',
-
+snippet define-ng-table-ext
+	'ng-table-ext.direcitve',
 
 snippet require-ng-controller
-	define(['app'], function(app) {
+	define([
+		'app'
+	], function(app) {
 		app.controller('${1}', function($scope) {
 			${0}
 		});
@@ -35,19 +40,36 @@ snippet require-ng-fetch
 
 	});
 
+
+# ----------------------angular-------------------------
+snippet ng-filter
+	app.filter('${1}', function() {
+		return function(data) {
+			switch (data) {
+				case ${2}: {
+					return ${3};
+				}
+				default: {
+					return ${0};
+				}
+			}
+		};
+	});
+
+
 # ----------------------ajax-------------------------
 snippet ng-fetch-service
 	${1:service}.${2} = (${3:data}) => {
 		let config = api.${4};
 		config.${5:params:data} = data;
 		return ajax.request(config);
-	}
+	};
 snippet ng-ds-ajax
 	async ${1}() {
 		try {
 			await ${2};
 		} catch(e) {
-			$notify.error(e.message || (e.error && e.error.message));
+			$notify.error(e.message || (e.error && e.error.message) || e);
 			throw e;
 		}
 	},

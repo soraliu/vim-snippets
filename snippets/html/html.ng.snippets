@@ -77,7 +77,8 @@ snippet ng-ui-select
 		<ui-select-match ${3:placeholder="请选择用户属性"}>
 			<span ng-bind="$item.${4:name}"></span>
 		</ui-select-match>
-		<ui-select-choices repeat="item in ${5:[]}">
+		<ui-select-choices repeat="item.id as item in ${5:[]} | filter: $select.search">
+			<div ng-bind-html="item.${6:name} | highlight: $select.search"></div>
 		</ui-select-choices>
 	</ui-select>
 snippet ng-switch
@@ -107,4 +108,9 @@ snippet ng-modal
 			<button class="btn btn-warning" type="button" ng-click="onClickCancel()">取消</button>
 		</div>
 	</script>
+
+# ----------------------ui-bootstrap-------------------------
+snippet ng-ui-popover
+	<span class="${1:glyphicon glyphicon-info-sign}" uib-popover="${2}" popover-trigger="'${3:mouseenter}'" ></span>
+
 
