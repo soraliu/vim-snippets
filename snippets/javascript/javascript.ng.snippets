@@ -17,10 +17,37 @@ snippet define-ng-table-ext
 
 snippet require-ng-controller
 	define([
-		'app'
+		'app',
+		'app-filters',
+		'angular-ui-notification',
 	], function(app) {
-		app.controller('${1}', function($scope) {
-			${0}
+		app.service('$1DS', function($notify) {
+			let ajax = {
+			};
+
+			this.ajax = ajax;
+		});
+		app.controller('${1}Controller', function($scope, $notify, $1DS) {
+			let dataInit = {
+				stateInit() {
+				},
+				async asyncInit() {
+					$scope.state = {
+						${2}
+					};
+				},
+				init() {
+					this.stateInit();
+					this.asyncInit();
+				}
+			};
+			let eventInit = {
+				init() {
+				}
+			};
+
+			dataInit.init();
+			eventInit.init();
 		});
 	});
 snippet require-ng-fetch
@@ -73,6 +100,8 @@ snippet ng-ds-ajax
 			throw e;
 		}
 	},
+snippet ng-notify-error-msg
+	$notify.error(e.message || (e.error && e.error.message) || e);
 
 # ----------------------directive-------------------------
 snippet ng-directive
@@ -113,7 +142,7 @@ snippet ng-modal "$uibModal"
 		.then(${4});
 
 
-snippet ng-table-ext
+snippet ng-table-ext-srv
 	$scope.table = {
 		${1}: {
 			setting: {
@@ -126,7 +155,7 @@ snippet ng-table-ext
 						${6}
 					}],
 					getData: function(params) {
-						let promise = fn.searchUser({page: params.page(), count: params.count()}).then(users => {
+						let promise = ${7}({page: params.page(), count: params.count()}).then(users => {
 							params.total(users.total);
 							return users.items;
 						}).catch(e => {
@@ -138,4 +167,30 @@ snippet ng-table-ext
 			},
 		},
 	};
+
+snippet ng-table-ext
+	$scope.table = {
+		${1}: {
+			setting: {
+				table: {
+					${2:searchable: false},
+					${3:columnable: false},
+					${4:count: 10},
+					${5:counts: [10, 20, 50, 100]},
+					cols: [{
+						${6}
+					}],
+				},
+			},
+			data: {
+				table: []
+			}
+		},
+	};
+
+
+snippet debug-setInterval-console
+	setInterval(() => {
+		console.log(${0});
+	}, 2000);
 
