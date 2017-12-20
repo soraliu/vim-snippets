@@ -1,0 +1,65 @@
+priority -50
+
+# ---------------------- angular2 material form -------------------------
+snippet ng2-mat-form-input "form input"
+<mat-form-field>
+	<input matInput placeholder="${0}">
+</mat-form-field>
+endsnippet
+
+snippet ng2-mat-form-password "form password"
+<mat-form-field>
+	<input matInput placeholder="密码" [type]="show ? 'text' : 'password'">
+	<mat-icon matSuffix (click)="show = !show">{{show ? 'visibility' : 'visibility_off'}}</mat-icon>
+</mat-form-field>
+endsnippet
+
+snippet ng2-mat-btn-basic
+<button mat-${1:raised-}button>${0}</button>
+endsnippet
+
+snippet ng2-mat-btn-primary
+<button mat-${1:raised-}button color="primary">${0}</button>
+endsnippet
+
+snippet ng2-mat-btn-accent
+<button mat-${1:raised-}button color="accent">${0}</button>
+endsnippet
+
+snippet ng2-mat-btn-warn
+<button mat-${1:raised-}button color="warn">${0}</button>
+endsnippet
+
+snippet ng2-mat-btn-disabled
+<button mat-${1:raised-}button disabled>${0}</button>
+endsnippet
+
+snippet ng2-mat-btn-link
+<a mat-${1:raised-}button routerLink="${1}">${0}</a>
+endsnippet
+
+
+# ---------------------- angular2 material card -------------------------
+snippet ng2-mat-card
+<mat-card>
+	<mat-card-header>
+		<!--
+		.example-header-image {
+			background-image: url('http://material.angular.io/assets/img/examples/shiba1.jpg');
+			background-size: cover;
+		}
+		-->
+		<div mat-card-avatar class="example-header-image"></div>
+		<mat-card-title>${1}</mat-card-title>
+		<mat-card-subtitle>${2}</mat-card-subtitle>
+	</mat-card-header>
+	<img mat-card-image src="${3}" alt="$3">
+	<mat-card-content>
+		${4}
+	</mat-card-content>
+	<mat-card-actions>
+		<button mat-button>${5}</button>
+		<button mat-button>${6}</button>
+	</mat-card-actions>
+</mat-card>
+endsnippet

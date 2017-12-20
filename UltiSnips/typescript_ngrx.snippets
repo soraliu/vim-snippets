@@ -1,0 +1,51 @@
+# ---------------------- angular2 ngrx action -------------------------
+snippet ngrx-action-import "import ngrx action"
+import { Action } from '@ngrx/store';
+endsnippet
+
+snippet ngrx-action "ngrx action"
+export const AT_${1}FETCH = 'AT_${1/\w/\u$0/g}FETCH';
+export class ${1/(\w)(\w+?)_/\u$1\L$2\E/g}Action implements Action {
+	readonly type = AT_${1/\w/\u$0/g}FETCH;
+
+	constructor(
+		public payload: any
+	) { }
+}
+
+export const AT_${1/\w/\u$0/g}FETCH_SUCCESS = 'AT_${1/\w/\u$0/g}FETCH_SUCCESS';
+export class ${1/(\w)(\w+?)_/\u$1\L$2\E/g}SuccessAction implements Action {
+	readonly type = AT_${1/\w/\u$0/g}FETCH_SUCCESS;
+
+	constructor(
+		public payload: any
+	) { }
+}
+
+export const AT_${1/\w/\u$0/g}FETCH_FAILURE = 'AT_${1/\w/\u$0/g}FETCH_FAILURE';
+export class ${1/(\w)(\w+?)_/\u$1\L$2\E/g}FailureAction implements Action {
+	readonly type = AT_${1/\w/\u$0/g}FETCH_FAILURE;
+
+	constructor(
+		public payload: any
+	) { }
+}
+endsnippet
+
+
+# ---------------------- angular2 reducer -------------------------
+snippet ngrx-reducer
+export function ${1}Reducer(state: ${1/.*/\u$0/g}State = $1InitalState, action): ${1/.*/\u$0/g}State {
+	switch (action.type) {
+		case AT_${2}: {
+			return {
+				...state,
+				${3}
+			};
+		}
+		default: {
+			return state;
+		}
+	}
+};
+endsnippet

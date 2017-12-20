@@ -1,0 +1,64 @@
+priority -50
+
+# ---------------------- angular2 class -------------------------
+snippet ng2-@module "angular2 module"
+import { NgModule } from '@angular/core';
+
+@NgModule({
+	imports: [
+	],
+	declarations: [
+	],
+	exports: [
+	],
+})
+export class ${1}Module { }
+endsnippet
+
+snippet ng2-@module-route "angular2 module routing"
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+const routes: Routes = [{
+	path: '${1}',
+	component: ${2},
+	${3:children: [{
+		path: '${4}',
+		loadChildren: '${5:xxx.module#XxxModule}',
+	}],}
+}];
+@NgModule({
+	imports: [
+		RouterModule.forChild(routes)
+	],
+	exports: [RouterModule]
+})
+export class ${4}RoutingModule { }
+endsnippet
+
+snippet ng2-@component "angular2 @Component"
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+@Component({
+	selector: 'app-${1:componentName}',
+	templateUrl: '$1.component.html',
+	styleUrls: ['$1.component.scss'],
+	encapsulation: ViewEncapsulation.${2:None},
+})
+export class ${1/\w+/\u$0/g}Component implements OnInit {
+	ngOnInit() {
+		${0}
+	}
+}
+endsnippet
+
+
+# ---------------------- angular2 routing -------------------------
+snippet ng2-routing-loadModule "module routing"
+{ path: '${1}', loadChildren: '${0}' },
+endsnippet
+
+
+# ---------------------- angular2 material design -------------------------
+snippet ng2-mat-form-import "import mtd form module"
+import { MatFormFieldModule } from '@angular/material';
+endsnippet
+
