@@ -1,9 +1,10 @@
 # ---------------------- angular2 ngrx action -------------------------
-snippet ngrx-action-import "import ngrx action"
+snippet ngrx-action-import "ngrx action import"
 import { Action } from '@ngrx/store';
 endsnippet
 
-snippet ngrx-action "ngrx action"
+# 这里的action的payload需要与后端api接口的请求参数一致
+snippet ngrx-action-fetch "new fetch ngrx action"
 export const AT_${1}FETCH = 'AT_${1/\w/\u$0/g}FETCH';
 export class ${1/(\w)(\w+?)_/\u$1\L$2\E/g}Action implements Action {
 	readonly type = AT_${1/\w/\u$0/g}FETCH;
@@ -32,10 +33,42 @@ export class ${1/(\w)(\w+?)_/\u$1\L$2\E/g}FailureAction implements Action {
 }
 endsnippet
 
+# ---------------------- angular2 state -------------------------
+snippet ngrx-state-import
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+endsnippet
+
+snippet ngrx-state "new module state"
+export interface ${1}State {
+}
+
+export const ${1/.*/\l$0/g}InitialState: AuthState = {
+};
+endsnippet
+
+snippet ngrx-state-index "gen index state"
+export interface State {
+	${1}: ${1/.*/\u$0/g}State;
+}
+export const reducers = {
+	$1: $1Reducer,
+};
+endsnippet
+
+snippet ngrx-state-feature-selector
+export const select${1}State = createFeatureSelector<$1State>('${1/\w+/\l$0/}');
+endsnippet
+
+snippet ngrx-state-selector
+export const select${1}State = createSelector(
+	select${2},
+	${2/\w+/\l$0/} => ${2/\w+/\l$0/}.${3},
+);
+endsnippet
 
 # ---------------------- angular2 reducer -------------------------
 snippet ngrx-reducer
-export function ${1}Reducer(state: ${1/.*/\u$0/g}State = $1InitalState, action): ${1/.*/\u$0/g}State {
+export function ${1}Reducer(state: ${1/.*/\u$0/g}State = $1InitialState, action: any): ${1/.*/\u$0/g}State {
 	switch (action.type) {
 		case AT_${2}: {
 			return {
@@ -48,4 +81,72 @@ export function ${1}Reducer(state: ${1/.*/\u$0/g}State = $1InitalState, action):
 		}
 	}
 };
+endsnippet
+
+# ---------------------- angular2 effect -------------------------
+snippet ngrx-effect-import
+import { Injectable } from '@angular/core';
+import { RequestMethod } from '@angular/http';
+import { Actions, Effect } from '@ngrx/effects';
+getApi Api ApiOptions HttpService FetchFailureAction
+endsnippet
+
+snippet ngrx-effect-class
+@Injectable()
+export class ${1}Effect {
+	api: Api = getApi('${2}').add({
+		${3}: {
+			url: '${4}',
+			method: RequestMethod.${5:Post},
+		},
+		${6}
+	});
+
+	constructor(
+		private action$: Actions,
+		private httpService: HttpService
+	) { }
+
+	${0}
+}
+endsnippet
+
+snippet ngrx-effect
+@Effect()
+${1}Effect$ = this.action$
+	.ofType<$1Action>(AT_${1/[A-Z][a-z]+/\U$0\E_/g}FETCH)
+	.map(action => action.payload)
+	.switchMap(body => {
+		return this.httpService.fetch(this.api.get('${2}', new ApiOptions({
+			apiArg: {
+				body
+			}
+		})))
+		.map(result => {
+			return new $1SuccessAction(result);
+		})
+		.catch(error => {
+			${3:return Observable.of(new $1FailureAction({error}));}
+			${4:return Observable.of(new FetchFailureAction({error}));}
+		});
+	});
+${0}
+endsnippet
+
+snippet ngrx-effect-index
+export const effects = [
+	${0}
+];
+endsnippet
+
+# ---------------------- angular2 ngrx module -------------------------
+snippet ngrx-module-import
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+endsnippet
+
+snippet ngrx-module "should in 'imports: [...]'"
+StoreModule.forRoot(reducers),
+// effect module must below of store module
+EffectsModule.forRoot(effects),
 endsnippet

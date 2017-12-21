@@ -50,9 +50,20 @@ export class ${1/\w+/\u$0/g}Component implements OnInit {
 }
 endsnippet
 
+snippet ng2-@service "angular2 service"
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ${1}Service {
+	constructor(
+	) { }
+	${0}
+}
+endsnippet
+
 
 # ---------------------- angular2 routing -------------------------
-snippet ng2-routing-loadModule "module routing"
+snippet ng2-route-loadModule "module route"
 { path: '${1}', loadChildren: '${0}' },
 endsnippet
 
@@ -62,3 +73,12 @@ snippet ng2-mat-form-import "import mtd form module"
 import { MatFormFieldModule } from '@angular/material';
 endsnippet
 
+
+# ---------------------- angular2 material design -------------------------
+snippet ng2-router-import
+import { Router } from '@angular/router';
+endsnippet
+
+snippet ng2-router-navigate
+this.router.navigate(['${1}']);
+endsnippet
