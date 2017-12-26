@@ -1,11 +1,12 @@
-# ----------------------bootstrap-------------------------
+# ---------------------- bootstrap -------------------------
 snippet bs-form-inline
-	<div class="form">
+	<div class="form-inline">
 		<div class="form-group">
 			<label>${1}</label>
 			<input class="form-control" type="${2:text}">
 		</div>
 	</div>
+endsnippet
 snippet bs-form-input-group
 	<div class="input-group">
 		<div class="input-group-btn">
@@ -13,17 +14,19 @@ snippet bs-form-input-group
 		</div>
 		<input class="form-control" type="text" />
 	</div>
+endsnippet
 snippet bs-form-dropdown
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 			${1}
 			<span class="caret"></span>
 		</button>
-		<ul class="dropdown-menu">
+		<ul class="dropdown-menu${2: dropdown-menu-right}">
 			<li><a>${2}</a></li>
 		</ul>
 	</div>
-snippet bs-form-date-time-picker
+endsnippet
+snippet bs-form-datetime-input
 	<!--
 		requirejs:
 		'styles/i18n//bootstrap-datetimepicker.zh-CN',
@@ -46,56 +49,23 @@ snippet bs-form-date-time-picker
 			></datetimepicker>
 		</ul>
 	</div>
+endsnippet
 
 
-# ----------------------petkit-------------------------
-snippet petkit-content
-	<div fill-height>
-		<section class="content-header">
-			<h1>${1}</h1>
-		</section>
-		<section class="content">
-			${0}
-		</section>
-	</div>
-snippet petkit-box
-	<div class="box box-default">
-		<div class="box-header with-border">
-			<h3 class="box-title">${1}</h3>
-		</div>
-		<div class="box-body">
-			${0}
-		</div>
-	</div>
 
-
-# ----------------------form-------------------------
-snippet ng-select
-	<select class="${1:form-control}" ${2:ng-change=""} ng-model="${3}" ng-options="select.${5} as select.${6} for select in ${4}"></select>
-snippet ng-ui-select
-	<ui-select class="${1}" ng-model="${2}" tagging tagging-label="false" multiple>
-		<ui-select-match ${3:placeholder="请选择用户属性"}>
-			<span ng-bind="$item.${4:name}"></span>
-		</ui-select-match>
-		<ui-select-choices repeat="item.id as item in ${5:[]} | filter: $select.search">
-			<div ng-bind-html="item.${6:name} | highlight: $select.search"></div>
-		</ui-select-choices>
-	</ui-select>
-snippet ng-switch
+# ----------------------ui-bootstrap-------------------------
+snippet ng-ui-popover
 	<!--
-		require: 
-		define-switch
+		require:
+		define-angular-ui-bootstrap
 	-->
-	<switch ng-model="${0}" class="green"></switch>
-
-
-
-# ----------------------ng-modal-------------------------
-snippet ng-template
-	<script type="text/ng-template" id="${1}">
-		${0}
-	</script>
-snippet ng-modal
+	<span class="${1:glyphicon glyphicon-info-sign}" uib-popover="${2}" popover-trigger="'${3:mouseenter}'"></span>
+endsnippet
+snippet ng-ui-modal
+	<!--
+		require:
+		define-angular-ui-bootstrap
+	-->
 	<script type="text/ng-template" id="${1:modal.html}">
 		<div class="modal-header">
 			<h3 class="modal-title">{{header}}</h3>
@@ -108,9 +78,68 @@ snippet ng-modal
 			<button class="btn btn-warning" type="button" ng-click="onClickCancel()">取消</button>
 		</div>
 	</script>
+endsnippet
 
-# ----------------------ui-bootstrap-------------------------
-snippet ng-ui-popover
-	<span class="${1:glyphicon glyphicon-info-sign}" uib-popover="${2}" popover-trigger="'${3:mouseenter}'" ></span>
+
+
+# ---------------------- petkit -------------------------
+snippet petkit-content
+	<div fill-height>
+		<section class="content-header">
+			<h1>${1}</h1>
+		</section>
+		<section class="content">
+			${0}
+		</section>
+	</div>
+endsnippet
+snippet petkit-box
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title">${1}</h3>
+		</div>
+		<div class="box-body">
+			${0}
+		</div>
+	</div>
+endsnippet
+
+
+
+# ---------------------- ng-form -------------------------
+snippet ng-select
+	<select class="${1:form-control}" ${2:ng-change=""} ng-model="${3}" ng-options="select.${5} as select.${6} for select in ${4}"></select>
+endsnippet
+snippet ng-ui-select
+	<!--
+		require:
+		define-ui-select
+	-->
+	<ui-select class="${1}" ng-model="${2}" tagging tagging-label="false" multiple>
+		<ui-select-match ${3:placeholder="请选择用户属性"}>
+			<span ng-bind="$item.${4:name}"></span>
+		</ui-select-match>
+		<ui-select-choices repeat="item.id as item in ${5:[]} | filter: $select.search">
+			<div ng-bind-html="item.${6:name} | highlight: $select.search"></div>
+		</ui-select-choices>
+	</ui-select>
+endsnippet
+snippet ng-switch
+	<!--
+		require: 
+		define-switch
+	-->
+	<switch ng-model="${0}" class="green"></switch>
+endsnippet
+
+
+
+# ---------------------- ng-template -------------------------
+snippet ng-template
+	<script type="text/ng-template" id="${1}">
+		${0}
+	</script>
+endsnippet
+
 
 

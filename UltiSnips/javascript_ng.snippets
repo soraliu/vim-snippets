@@ -1,19 +1,28 @@
-# ----------------------require-------------------------
+# ---------------------- requirejs define -------------------------
 snippet define-notify
 	'angular-ui-notification',
+endsnippet
 snippet define-datetime-input
 	'styles/i18n//bootstrap-datetimepicker.zh-CN',
 	'angular-bootstrap-datetimepicker',
 	'angular-bootstrap-datetimepicker-templates',
 	'angular-date-time-input',
+endsnippet
 snippet define-datetime-duration
 	'duration-picker',
+endsnippet
 snippet define-switch
 	'angular-ui-switch',
+endsnippet
+snippet define-angular-ui-bootstrap
+	'angular-ui-bootstrap',
+endsnippet
 snippet define-ui-select
 	'ui-select',
+endsnippet
 snippet define-ng-table-ext
 	'ng-table-ext.direcitve',
+endsnippet
 
 snippet require-ng-controller
 	define([
@@ -50,6 +59,7 @@ snippet require-ng-controller
 			eventInit.init();
 		});
 	});
+endsnippet
 snippet require-ng-fetch
 	define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
 
@@ -66,6 +76,29 @@ snippet require-ng-fetch
 		});
 
 	});
+endsnippet
+
+
+
+# ---------------------- fetch -------------------------
+snippet ng-fetch-service
+	${1:service}.${2} = (${3:data}) => {
+		let config = api.${4};
+		config.${5:params:data} = data;
+		return ajax.request(config);
+	};
+endsnippet
+snippet ng-fetch-fn
+	async ${1}() {
+		try {
+			await ${2};
+		} catch(e) {
+			$notify.error(e.message || (e.error && e.error.message) || e);
+			throw e;
+		}
+	},
+endsnippet
+
 
 
 # ----------------------angular-------------------------
@@ -82,28 +115,7 @@ snippet ng-filter
 			}
 		};
 	});
-
-
-# ----------------------ajax-------------------------
-snippet ng-fetch-service
-	${1:service}.${2} = (${3:data}) => {
-		let config = api.${4};
-		config.${5:params:data} = data;
-		return ajax.request(config);
-	};
-snippet ng-ds-ajax
-	async ${1}() {
-		try {
-			await ${2};
-		} catch(e) {
-			$notify.error(e.message || (e.error && e.error.message) || e);
-			throw e;
-		}
-	},
-snippet ng-notify-error-msg
-	$notify.error(e.message || (e.error && e.error.message) || e);
-
-# ----------------------directive-------------------------
+endsnippet
 snippet ng-directive
 	app.directive('${1}', function() {
 		return {
@@ -117,9 +129,24 @@ snippet ng-directive
 			templateUrl: '${4}'
 		};
 	});
+endsnippet
 
 
-# ----------------------modal-------------------------
+
+# ---------------------- ng-notify -------------------------
+snippet ng-notify-error
+	$notify.error(${0});
+endsnippet
+snippet ng-notify-error-msg
+	$notify.error(e.message || (e.error && e.error.message) || e);
+endsnippet
+snippet ng-notify-success
+	$notify.success(${0});
+endsnippet
+
+
+
+# ---------------------- ng-modal -------------------------
 snippet ng-modal "$uibModal"
 	let model = $uibModal.open({
 		animation: true,
@@ -140,9 +167,12 @@ snippet ng-modal "$uibModal"
 	})
 		.result
 		.then(${4});
+endsnippet
 
 
-snippet ng-table-ext-srv
+
+# ---------------------- ng-table -------------------------
+snippet ng-table-ext-srv "服务端分页"
 	$scope.table = {
 		${1}: {
 			setting: {
@@ -167,8 +197,8 @@ snippet ng-table-ext-srv
 			},
 		},
 	};
-
-snippet ng-table-ext
+endsnippet
+snippet ng-table-ext "客户端分页"
 	$scope.table = {
 		${1}: {
 			setting: {
@@ -187,10 +217,16 @@ snippet ng-table-ext
 			}
 		},
 	};
+endsnippet
 
 
+
+# ---------------------- debug -------------------------
 snippet debug-setInterval-console
 	setInterval(() => {
 		console.log(${0});
 	}, 2000);
+endsnippet
+
+
 
