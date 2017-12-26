@@ -1,231 +1,231 @@
 # ---------------------- requirejs define -------------------------
 snippet define-notify
-	'angular-ui-notification',
+'angular-ui-notification',
 endsnippet
 snippet define-datetime-input
-	'styles/i18n//bootstrap-datetimepicker.zh-CN',
-	'angular-bootstrap-datetimepicker',
-	'angular-bootstrap-datetimepicker-templates',
-	'angular-date-time-input',
+'styles/i18n//bootstrap-datetimepicker.zh-CN',
+'angular-bootstrap-datetimepicker',
+'angular-bootstrap-datetimepicker-templates',
+'angular-date-time-input',
 endsnippet
 snippet define-datetime-duration
-	'duration-picker',
+'duration-picker',
 endsnippet
 snippet define-switch
-	'angular-ui-switch',
+'angular-ui-switch',
 endsnippet
 snippet define-angular-ui-bootstrap
-	'angular-ui-bootstrap',
+'angular-ui-bootstrap',
 endsnippet
 snippet define-ui-select
-	'ui-select',
+'ui-select',
 endsnippet
 snippet define-ng-table-ext
-	'ng-table-ext.direcitve',
+'ng-table-ext.direcitve',
 endsnippet
 
 snippet require-ng-controller
-	define([
-		'app',
-		'app-filters',
-		'angular-ui-notification',
-	], function(app) {
-		app.service('$1DS', function($notify) {
-			let ajax = {
-			};
+define([
+	'app',
+	'app-filters',
+	'angular-ui-notification',
+], function(app) {
+	app.service('$1DS', function($notify) {
+		let ajax = {
+		};
 
-			this.ajax = ajax;
-		});
-		app.controller('${1}Controller', function($scope, $notify, $1DS) {
-			let dataInit = {
-				stateInit() {
-				},
-				async asyncInit() {
-					$scope.state = {
-						${2}
-					};
-				},
-				init() {
-					this.stateInit();
-					this.asyncInit();
-				}
-			};
-			let eventInit = {
-				init() {
-				}
-			};
-
-			dataInit.init();
-			eventInit.init();
-		});
+		this.ajax = ajax;
 	});
+	app.controller('${1}Controller', function($scope, $notify, $1DS) {
+		let dataInit = {
+			stateInit() {
+			},
+			async asyncInit() {
+				$scope.state = {
+					${2}
+				};
+			},
+			init() {
+				this.stateInit();
+				this.asyncInit();
+			}
+		};
+		let eventInit = {
+			init() {
+			}
+		};
+
+		dataInit.init();
+		eventInit.init();
+	});
+});
 endsnippet
 snippet require-ng-fetch
-	define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
+define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
 
-		app.factory('${1}', function(ajax) {
-			let service = {};
+	app.factory('${1}', function(ajax) {
+		let service = {};
 
-			service.${2} = (${3:data}) => {
-				let config = api.${4};
-				config.${5:params:data} = data;
-				return ajax.request(config);
-			};
+		service.${2} = (${3:data}) => {
+			let config = api.${4};
+			config.${5:params:data} = data;
+			return ajax.request(config);
+		};
 
-			return service;
-		});
-
+		return service;
 	});
+
+});
 endsnippet
 
 
 
 # ---------------------- fetch -------------------------
 snippet ng-fetch-service
-	${1:service}.${2} = (${3:data}) => {
-		let config = api.${4};
-		config.${5:params:data} = data;
-		return ajax.request(config);
-	};
+${1:service}.${2} = (${3:data}) => {
+	let config = api.${4};
+	config.${5:params:data} = data;
+	return ajax.request(config);
+};
 endsnippet
 snippet ng-fetch-fn
-	async ${1}() {
-		try {
-			await ${2};
-		} catch(e) {
-			$notify.error(e.message || (e.error && e.error.message) || e);
-			throw e;
-		}
-	},
+async ${1}() {
+	try {
+		await ${2};
+	} catch(e) {
+		$notify.error(e.message || (e.error && e.error.message) || e);
+		throw e;
+	}
+},
 endsnippet
 
 
 
 # ----------------------angular-------------------------
 snippet ng-filter
-	app.filter('${1}', function() {
-		return function(data) {
-			switch (data) {
-				case ${2}: {
-					return ${3};
-				}
-				default: {
-					return ${0};
-				}
+app.filter('${1}', function() {
+	return function(data) {
+		switch (data) {
+			case ${2}: {
+				return ${3};
 			}
-		};
-	});
+			default: {
+				return ${0};
+			}
+		}
+	};
+});
 endsnippet
 snippet ng-directive
-	app.directive('${1}', function() {
-		return {
-			restrict: 'E',
-			scope: {
-				${2}
-			},
-			controller: function($scope) {
-				${3}
-			},
-			templateUrl: '${4}'
-		};
-	});
+app.directive('${1}', function() {
+	return {
+		restrict: 'E',
+		scope: {
+			${2}
+		},
+		controller: function($scope) {
+			${3}
+		},
+		templateUrl: '${4}'
+	};
+});
 endsnippet
 
 
 
 # ---------------------- ng-notify -------------------------
 snippet ng-notify-error
-	$notify.error(${0});
+$notify.error(${0});
 endsnippet
 snippet ng-notify-error-msg
-	$notify.error(e.message || (e.error && e.error.message) || e);
+$notify.error(e.message || (e.error && e.error.message) || e);
 endsnippet
 snippet ng-notify-success
-	$notify.success(${0});
+$notify.success(${0});
 endsnippet
 
 
 
 # ---------------------- ng-modal -------------------------
 snippet ng-modal "$uibModal"
-	let model = $uibModal.open({
-		animation: true,
-		templateUrl: '${1:modal.html}',
-		controller: function($scope) {
-			$scope.header = ${2:''};
-			$scope.onClickOk = () => {
-				$uibModalInstance.close('ok');
-			};
-			$scope.onClickCancel = () => {
-				$uibModalInstance.dismiss('cancel');
-			};
-		},
-		resolve: {
-			// 数据需要以函数形式传递，不然会报错
-			${3:data: () => data}
-		}
-	})
-		.result
-		.then(${4});
+let model = $uibModal.open({
+	animation: true,
+	templateUrl: '${1:modal.html}',
+	controller: function($scope) {
+		$scope.header = ${2:''};
+		$scope.onClickOk = () => {
+			$uibModalInstance.close('ok');
+		};
+		$scope.onClickCancel = () => {
+			$uibModalInstance.dismiss('cancel');
+		};
+	},
+	resolve: {
+		// 数据需要以函数形式传递，不然会报错
+		${3:data: () => data}
+	}
+})
+	.result
+	.then(${4});
 endsnippet
 
 
 
 # ---------------------- ng-table -------------------------
 snippet ng-table-ext-srv "服务端分页"
-	$scope.table = {
-		${1}: {
-			setting: {
-				table: {
-					${2:searchable: false},
-					${3:columnable: false},
-					${4:count: 10},
-					${5:counts: [10, 20, 50, 100]},
-					cols: [{
-						${6}
-					}],
-					getData: function(params) {
-						let promise = ${7}({page: params.page(), count: params.count()}).then(users => {
-							params.total(users.total);
-							return users.items;
-						}).catch(e => {
-							console.log(e);
-						});
-						return promise;
-					}
-				},
+$scope.table = {
+	${1}: {
+		setting: {
+			table: {
+				${2:searchable: false},
+				${3:columnable: false},
+				${4:count: 10},
+				${5:counts: [10, 20, 50, 100]},
+				cols: [{
+					${6}
+				}],
+				getData: function(params) {
+					let promise = ${7}({page: params.page(), count: params.count()}).then(users => {
+						params.total(users.total);
+						return users.items;
+					}).catch(e => {
+						console.log(e);
+					});
+					return promise;
+				}
 			},
 		},
-	};
+	},
+};
 endsnippet
 snippet ng-table-ext "客户端分页"
-	$scope.table = {
-		${1}: {
-			setting: {
-				table: {
-					${2:searchable: false},
-					${3:columnable: false},
-					${4:count: 10},
-					${5:counts: [10, 20, 50, 100]},
-					cols: [{
-						${6}
-					}],
-				},
+$scope.table = {
+	${1}: {
+		setting: {
+			table: {
+				${2:searchable: false},
+				${3:columnable: false},
+				${4:count: 10},
+				${5:counts: [10, 20, 50, 100]},
+				cols: [{
+					${6}
+				}],
 			},
-			data: {
-				table: []
-			}
 		},
-	};
+		data: {
+			table: []
+		}
+	},
+};
 endsnippet
 
 
 
 # ---------------------- debug -------------------------
 snippet debug-setInterval-console
-	setInterval(() => {
-		console.log(${0});
-	}, 2000);
+setInterval(() => {
+	console.log(${0});
+}, 2000);
 endsnippet
 
 
