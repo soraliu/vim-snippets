@@ -20,8 +20,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [{
 	path: '${1}',
-	component: ${2},
-	${3:children: [{
+	component: ${2},${3:
+	children: [{
 		path: '${4}',
 		loadChildren: '${5:xxx.module#XxxModule}',
 	}],}
@@ -32,18 +32,20 @@ const routes: Routes = [{
 	],
 	exports: [RouterModule]
 })
-export class ${4}RoutingModule { }
+export class ${6}RoutingModule { }
 endsnippet
 
 snippet ng2-@component "angular2 @Component"
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+// ${1:componentName}
 @Component({
-	selector: 'app-${1:componentName}',
-	templateUrl: '$1.component.html',
-	styleUrls: ['$1.component.scss'],
-	encapsulation: ViewEncapsulation.${2:None},
+	selector: 'app${1/(\w+)\s?/-\L$1\E/g}',
+	templateUrl: '${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
+	styleUrls: [ '${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],${2:
+	encapsulation: ViewEncapsulation.None,}${3:
+	encapsulation: ViewEncapsulation.Emulated,}
 })
-export class ${1/\w+/\u$0/g}Component implements OnInit {
+export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit {
 	ngOnInit() {
 		${0}
 	}

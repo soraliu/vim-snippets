@@ -37,26 +37,27 @@ define([
 		this.ajax = ajax;
 	});
 	app.controller('${1}Controller', function($scope, $notify, $1DS) {
-		let dataInit = {
+		let data = {
 			stateInit() {
-			},
-			async asyncInit() {
 				$scope.state = {
 					${2}
 				};
+			},
+			async asyncInit() {
+				${3}
 			},
 			init() {
 				this.stateInit();
 				this.asyncInit();
 			}
 		};
-		let eventInit = {
+		let event = {
 			init() {
 			}
 		};
 
-		dataInit.init();
-		eventInit.init();
+		data.init();
+		event.init();
 	});
 });
 endsnippet
@@ -117,17 +118,51 @@ app.filter('${1}', function() {
 });
 endsnippet
 snippet ng-directive
-app.directive('${1}', function() {
-	return {
-		restrict: 'E',
-		scope: {
-			${2}
+// ${1}
+new function() {
+	let config = {
+		templateUrl: 'scripts/directive/${2}${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}/${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.html'
+	}
+
+	app.directive('${1/(\s)?(\w+)/(?1:\u$2:\L$2\E)/g}', function() {
+		return {
+			restrict: 'E',${3:
+			// ng-transclude
+			transclude: true,}
+			scope: {
+				${4:state: '='}
+			},
+			controller: function($scope) {
+				${0}
+			},
+			templateUrl: config.templateUrl
+		};
+	});
+}
+endsnippet
+snippet ng-controller
+app.controller('${1}Controller', function($scope) {
+	let data = {
+		stateInit() {
+			$scope.state = {
+				${2}
+			};
 		},
-		controller: function($scope) {
+		async asyncInit() {
 			${3}
 		},
-		templateUrl: '${4}'
+		init() {
+			this.stateInit();
+			this.asyncInit();
+		}
 	};
+	let event = {
+		init() {
+		}
+	};
+
+	data.init();
+	event.init();
 });
 endsnippet
 
