@@ -130,10 +130,31 @@ new function() {
 			// ng-transclude
 			transclude: true,}
 			scope: {
-				${4:state: '='}
+				${4:state: '=',}${5:
+				id: '@',}
 			},
 			controller: function($scope) {
-				${0}
+				let data = {
+					stateInit() {
+						$scope.state = {
+							${6}
+						};
+					},
+					async asyncInit() {
+						${7}
+					},
+					init() {
+						this.stateInit();
+						this.asyncInit();
+					}
+				};
+				let event = {
+					init() {
+					}
+				};
+
+				data.init();
+				event.init();
 			},
 			templateUrl: config.templateUrl
 		};
