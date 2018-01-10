@@ -1,3 +1,8 @@
+priority -50
+# ---------------------- html -------------------------
+extends html
+
+
 # ---------------------- requirejs define -------------------------
 snippet define-notify
 'angular-ui-notification',
@@ -120,6 +125,14 @@ endsnippet
 snippet ng-service
 app.service('${1}', function() {
 	this.${2} = ${0};
+});
+endsnippet
+snippet ng-service-ds
+app.service('${1}DS', function($notify) {
+	let ajax = {
+	};
+
+	this.ajax = ajax;
 });
 endsnippet
 snippet ng-directive
@@ -280,6 +293,11 @@ $scope.table = {
 };
 endsnippet
 
+
+# ---------------------- tab -------------------------
+snippet ng-tab "js ui-bootstrap"
+
+endsnippet
 
 
 # ---------------------- debug -------------------------
