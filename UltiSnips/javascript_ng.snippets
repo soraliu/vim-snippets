@@ -100,7 +100,6 @@ async ${1}() {
 		await ${2};
 	} catch(e) {
 		$notify.error(e.message || (e.error && e.error.message) || e);
-		throw e;
 	}
 },
 endsnippet
