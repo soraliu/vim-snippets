@@ -48,8 +48,13 @@ define([
 					${2}
 				};
 			},
-			async asyncInit() {
-				${3}
+			async async${3}() {
+				${0}
+
+				$scope.$apply();
+			},
+			asyncInit() {
+				this.async$3();
 			},
 			init() {
 				this.stateInit();
@@ -157,8 +162,13 @@ new function() {
 							${6}
 						};
 					},
-					async asyncInit() {
-						${7}
+					async async${7}() {
+						${0}
+
+						$scope.$apply();
+					},
+					asyncInit() {
+						this.async$7();
 					},
 					init() {
 						this.stateInit();
@@ -186,8 +196,13 @@ app.controller('${1}Controller', function($scope) {
 				${2}
 			};
 		},
-		async asyncInit() {
-			${3}
+		async async${3}() {
+			${0}
+
+			$scope.$apply();
+		},
+		asyncInit() {
+			this.async$3();
 		},
 		init() {
 			this.stateInit();
