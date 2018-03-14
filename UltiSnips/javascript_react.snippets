@@ -1,0 +1,215 @@
+priority -50
+
+# react
+snippet react-import-react "React"
+import React from 'react';
+endsnippet
+snippet react-import-react-dom "ReactDOM"
+import ReactDOM from 'react-dom';
+endsnippet
+snippet react-component-extends "extends React.Component"
+class $1 extends React.Component {
+	render () {
+		return (
+			${2:<div></div>}
+		);
+	}
+}
+endsnippet
+snippet react-component-create "import ... extends ..."
+import React from 'react';
+
+//redux
+import {
+	bindActionCreators
+} from 'redux';
+import {
+	connect
+} from 'react-redux';
+
+class ${1} extends React.Component {
+	render() {
+		return (
+			<div>
+				${0}
+			</div>
+		);
+	}
+}
+
+let mapStateToProps = state => ({
+});
+
+let mapDispatchToProps = dispatch => bindActionCreators({
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)($1);
+
+endsnippet
+
+
+# react-router
+snippet react-router-import-route "Route"
+// react-router
+import {
+	Route,
+} from 'react-router-dom';
+endsnippet
+
+snippet react-router-import-redirect "Redirect"
+// react-router
+import {
+	Redirect,
+} from 'react-router-dom';
+endsnippet
+
+
+# redux
+snippet react-redux-map-import "bindActionCreators, connect"
+//redux
+import {
+	bindActionCreators
+} from 'redux';
+import {
+	connect
+} from 'react-redux';
+endsnippet
+
+snippet react-redux-map
+let mapStateToProps = state => ({
+	$1
+});
+
+let mapDispatchToProps = dispatch => bindActionCreators({
+	$2
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)($0);
+endsnippet
+
+snippet react-redux-index-module-import
+import {
+	reducers as $1Reducers,
+	initialState as $1InitialState,
+	sagas as $1Sagas,
+} from './${1}';
+endsnippet
+
+snippet react-redux-module-index
+import {
+combineReducers,
+} from 'redux';
+
+import ${1}Reducers from './$1/reducer';
+import $1InitialState from './$1/state';
+import $1Sagas from './$1/saga';
+
+export const reducers = combineReducers({
+	$1: $1Reducers,
+});
+
+export const initialState = {
+	$1: $1InitialState,
+};
+
+export const sagas = [
+	...$1Sagas,
+];
+endsnippet
+
+snippet react-redux-module-action
+export const $3 = {
+	$4: '$3_$4'
+};
+export const ac${1} = ({
+	${2},
+}) => ({
+	type: ${3}.${4},
+	payload: {
+		$2,
+	}
+});
+endsnippet
+
+snippet react-redux-module-reducer
+import _clone from 'lodash.clonedeep';
+
+import {
+	AT_${1:USER},
+} from './action';
+
+export default function (state = {}, action) {
+	let _state = _clone(state);
+	switch (action.type) {
+		case AT_$1.${2:GET_LIST_SUCCESS}:
+			return {
+				..._state,${3:
+				...action.payload,}
+			};
+		default:
+			return _state;
+	}
+}
+endsnippet
+
+snippet react-redux-module-state
+const initialState = {
+	${1}
+};
+
+export default initialState;
+endsnippet
+
+snippet react-redux-module-saga
+import {
+	takeLatest,
+	call,
+	put,
+} from 'redux-saga/effects';
+
+import {
+	ac${6:GetListSuccess},
+	AT_${2:USER},
+} from './action';
+
+import {
+	${5:getUserList},
+} from 'server/fetch/${4:user/user}.fetch';
+
+function* ${1:fetchUserList}(action) {
+	const $7 = yield call($5, action.payload);
+
+	yield put(ac$6({${7:list}}));
+}
+
+function* watch(action) {
+	yield takeLatest(AT_$2.${3:GET_LIST}, $1);
+}
+
+const sagas = [
+	watch(),
+];
+
+export default sagas;
+
+endsnippet
+
+
+# fetch
+snippet react-fetch-create "import ..."
+import Fetch from '../fetch';
+
+let api = {
+	${1}: {
+		url: '${2}',
+		method: '${3}',
+	}
+};
+
+export const $1 = async () => {
+	let config = api.$1;
+	let data = await Fetch.request(config);
+	return data;
+};
+endsnippet
+

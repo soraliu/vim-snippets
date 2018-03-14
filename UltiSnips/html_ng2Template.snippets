@@ -1,0 +1,11 @@
+priority -50
+
+snippet ng2-container
+<ng-container [ngSwitch]="${1}">
+	<ng-container *ngSwitchCase="${2}">
+	</ng-container>
+	<ng-container *ngSwitchDefault>
+		${0}
+	</ng-container>
+</ng-container>
+endsnippet

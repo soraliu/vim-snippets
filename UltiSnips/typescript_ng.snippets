@@ -2,7 +2,9 @@ priority -50
 
 # ---------------------- angular2 class -------------------------
 snippet ng2-@module "angular2 module"
-import { NgModule } from '@angular/core';
+import {
+	NgModule
+} from '@angular/core';
 
 @NgModule({
 	imports: [
@@ -16,16 +18,23 @@ export class ${1}Module { }
 endsnippet
 
 snippet ng2-@module-route "angular2 module routing"
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {
+	NgModule
+} from '@angular/core';
+import {
+	Routes,
+	RouterModule
+} from '@angular/router';
+
 const routes: Routes = [{
 	path: '${1}',
-	component: ${2},${3:
+	component: ${2}${0},${3:
 	children: [{
 		path: '${4}',
 		loadChildren: '${5:xxx.module#XxxModule}',
 	}],}
 }];
+
 @NgModule({
 	imports: [
 		RouterModule.forChild(routes)
@@ -36,12 +45,17 @@ export class ${6}RoutingModule { }
 endsnippet
 
 snippet ng2-@component "angular2 @Component"
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+	Component,
+	OnInit,
+	ViewEncapsulation
+} from '@angular/core';
+
 // ${1:componentName}
 @Component({
 	selector: 'app${1/(\w+)\s?/-\L$1\E/g}',
-	templateUrl: '${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
-	styleUrls: [ '${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],${2:
+	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
+	styleUrls: [ './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],${2:
 	encapsulation: ViewEncapsulation.None,}${3:
 	encapsulation: ViewEncapsulation.Emulated,}
 })
@@ -53,7 +67,9 @@ export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit {
 endsnippet
 
 snippet ng2-@service "angular2 service"
-import { Injectable } from '@angular/core';
+import {
+	Injectable
+} from '@angular/core';
 
 @Injectable()
 export class ${1}Service {
