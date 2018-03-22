@@ -16,6 +16,38 @@ import {
 })
 export class ${1}Module { }
 endsnippet
+snippet ng2-@module-common "angular2 common module"
+import {
+	NgModule
+} from '@angular/core';
+import {
+	MaterialModule
+} from '@petkit/material';
+import {
+	RepositoryModule
+} from '@petkit/flux';
+import {
+	${1/(\w+)\s?/\u$1/g}RoutingModule,
+} from './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}-routing.module';
+import {
+	${1/(\w+)\s?/\u$1/g}Component
+} from './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component';
+
+
+// ${1:componentName}
+@NgModule({
+	imports: [
+		${1/(\w+)\s?/\u$1/g}RoutingModule,
+		MaterialModule,
+		RepositoryModule,
+	],
+	declarations: [
+		${1/(\w+)\s?/\u$1/g}Component,
+		$0
+	],
+})
+export class ${1/(\w+)\s?/\u$1/g}Module { }
+endsnippet
 
 snippet ng2-@module-route "angular2 module routing"
 import {
@@ -43,6 +75,51 @@ const routes: Routes = [{
 })
 export class ${6}RoutingModule { }
 endsnippet
+snippet ng2-@module-route-common "angular2 common module routing"
+import {
+	NgModule
+} from '@angular/core';
+import {
+	Routes,
+	RouterModule
+} from '@angular/router';
+import {
+	CreateComponent
+} from './create/create.component';
+import {
+	ListComponent
+} from './list/list.component';
+import {
+	${1/(\w+)\s?/\u$1/g}Component
+} from './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component';
+
+const routes: Routes = [{
+	path: '',
+	component: ${1/(\w+)\s?/\u$1/g}Component,
+	children: [{
+		path: '',
+		redirectTo: 'list',
+	}, {
+		path: 'list',
+		component: ListComponent,
+	}, {
+		path: 'create',
+		component: CreateComponent,
+	}, {
+		path: 'update/:id',
+		component: CreateComponent,
+	}]
+}];
+
+// ${1:componentName}
+@NgModule({
+	imports: [
+		RouterModule.forChild(routes)
+	],
+	exports: [RouterModule]
+})
+export class ${1/(\w+)\s?/\u$1/g}RoutingModule { }
+endsnippet
 
 snippet ng2-@component "angular2 @Component"
 import {
@@ -61,7 +138,89 @@ import {
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit {
 	ngOnInit() {
-		${0}
+	}
+}
+endsnippet
+snippet ng2-@component-common "angular2 common component"
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+	ViewEncapsulation
+} from '@angular/core';
+import {
+
+} from '@petkit/flux';
+import {
+	Store
+} from '@ngrx/store';
+import {
+	${1/(\w+)\s?/\u$1/g}Namespace
+} from './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.interface';
+
+
+// ${1:componentName}
+@Component({
+	selector: 'common-${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}',
+	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
+	styleUrls: [ './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],
+	encapsulation: ViewEncapsulation.Emulated,
+})
+export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, ${2:Common.CompRx} {
+	state: ${1/(\w+)\s?/\u$1/g}Namespace.IState;
+	rx: ${1/(\w+)\s?/\u$1/g}Namespace.IRx;
+
+	constructor(
+		public store: Store<>,
+	) {
+		this.initRx();
+		this.initState();
+	}
+
+	initState() {
+		this.state = {
+			${3}
+		};
+
+		${4:this.rx.dispatchGetList();
+		this.rx.getList().subscribe(cages => {
+			this.state.cages = cages;
+		});}
+	}
+
+	initRx() {
+		this.rx = {
+			${5:dispatchGetList: () => {
+				this.chainCageStore.dispatch(new ChainCageActions.ChainCageListAction());
+			},
+			getList: () => {
+				return this.chainCageStore.select(CageStore.selectChainCageList);
+			}}
+		};
+	}
+
+	ngOnInit() {
+	}
+
+	ngOnDestroy() {
+		this.rx.destroy.map(v => v.unsubscribe());
+	}
+}
+endsnippet
+
+snippet ng2-@component-interface "angular2 component interface"
+import {
+	Observable
+} from 'rxjs/Rx';
+
+export namespace ${1}Namespace {
+	export interface IState {
+		${2:cages: IChainCage[];}
+	}
+
+	export interface IRx {
+		${3:dispatchGetList: () => void;}
+		${4:getList: () => Observable<IChainCage[]>;}
 	}
 }
 endsnippet
