@@ -1,6 +1,16 @@
 priority -50
 
 # ---------------------- angular2 material form -------------------------
+snippet ng2-mat-form-select "form select"
+<mat-form-field>
+	<mat-select placeholder="${1}">
+		<mat-option *ngFor="let option of ${2:options}" [value]="option.value">
+			{{ option.text }}
+		</mat-option>
+	</mat-select>
+</mat-form-field>
+endsnippet
+
 snippet ng2-mat-form-input "form input"
 <mat-form-field>
 	<input matInput placeholder="${0}">
