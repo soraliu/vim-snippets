@@ -126,7 +126,7 @@ import {
 	Component,
 	OnInit,
 	OnDestroy,
-	ViewEncapsulation,
+	ViewEncapsulation
 } from '@angular/core';
 
 // ${1:componentName}
@@ -138,7 +138,7 @@ import {
 	encapsulation: ViewEncapsulation.Emulated,}
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy {
-	constructor() {
+	constructor(${0}) {
 	}
 	ngOnInit() {
 	}
