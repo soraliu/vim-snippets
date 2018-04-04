@@ -146,6 +146,55 @@ export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy {
 	}
 }
 endsnippet
+
+snippet ng2-@component-common-rx "angular2 common component rx"
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+	ViewEncapsulation,
+} from '@angular/core';
+import {
+	Subscription,
+} from 'rxjs/Rx';
+import {
+	${2}Service,
+	$2Interfaces,
+} from '@petkit/flux';
+import {
+	NCommon,
+} from '../../../common/interface/common.interface';
+
+
+// ${1:componentName}
+@Component({
+	selector: 'common-${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}',
+	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
+	styleUrls: [ './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],
+	encapsulation: ViewEncapsulation.Emulated,
+})
+export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, NCommon.CompRx {
+	subs: Subscription[];
+
+	constructor(
+		private ${2/(\w+)/\l$1/g}Service: $2Service,
+	) {}
+
+	ngOnInit() {
+		this.initObs();
+	}
+
+	ngOnDestroy() {
+		this.subs.map(sub => sub.unsubscribe());
+	}
+
+	private initObs() {
+		this.subs.push(this.${2/(\w+)/\l$1/g}Service.${3}.subscribe(() => {
+		}));
+	}
+}
+endsnippet
+
 snippet ng2-@component-common "angular2 common component"
 import {
 	Component,
@@ -160,7 +209,7 @@ import {
 	Store
 } from '@ngrx/store';
 import {
-	${1/(\w+)\s?/\u$1/g}Namespace
+	N${1/(\w+)\s?/\u$1/g}
 } from './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.interface';
 
 
@@ -172,8 +221,8 @@ import {
 	encapsulation: ViewEncapsulation.Emulated,
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, ${2:Common.CompRx} {
-	state: ${1/(\w+)\s?/\u$1/g}Namespace.IState;
-	rx: ${1/(\w+)\s?/\u$1/g}Namespace.IRx;
+	state: N${1/(\w+)\s?/\u$1/g}.IState;
+	rx: N${1/(\w+)\s?/\u$1/g}.IRx;
 
 	constructor(
 		public store: Store<>,
@@ -263,4 +312,20 @@ endsnippet
 
 snippet ng2-router-navigate
 this.router.navigate(['${1}']);
+endsnippet
+
+snippet ng2-two-way-binding
+private _${1:value};
+@Output()
+$1Change: EventEmitter<any> = new EventEmitter<any>();
+@Input()
+get $1() {
+	return this._$1;
+}
+set $1(_$1) {
+	if (_$1 !== this._$1) {
+		this._$1 = _$1;
+		this.$1Change.emit(_$1);
+	}
+}
 endsnippet
