@@ -174,7 +174,7 @@ import {
 	encapsulation: ViewEncapsulation.Emulated,
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, NCommon.CompRx {
-	subs: Subscription[];
+	subs: Subscription[] = [];
 
 	constructor(
 		private ${2/(\w+)/\l$1/g}Service: $2Service,
