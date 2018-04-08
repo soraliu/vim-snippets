@@ -262,6 +262,54 @@ export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, ${2:Com
 }
 endsnippet
 
+snippet ng2-@directive "angular2 directive"
+import {
+	Directive,
+	Input,
+	Output,
+	OnInit,
+	OnChanges,
+	SimpleChanges,
+	ElementRef,
+} from '@angular/core';
+
+@Directive({
+	selector: '[${1/(\w+)/\l$1/g}]'
+})
+export class ${1}Directive implements OnInit, OnChanges {
+	_container: HTMLDivElement;
+
+	constructor(
+		private el: ElementRef,
+	) {
+	}
+
+	ngOnInit() {
+		this.el.nativeElement.appendChild(this.createModalCheck());
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		${4:this.checked = changes.checked.currentValue;}
+
+		this.render();
+	}
+
+	createModalCheck() {
+		const container = window.document.createElement('div');
+		this._container = container;
+
+		this.render();
+		return container;
+	}
+
+	render() {
+		${3:if (this._container) {
+			this._container.style.opacity = this.checked ? '1' : '0';
+		}}
+	}
+}
+endsnippet
+
 snippet ng2-@component-interface "angular2 component interface"
 import {
 	Observable
