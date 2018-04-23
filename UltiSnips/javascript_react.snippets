@@ -63,6 +63,26 @@ import {
 } from 'react-router-dom';
 endsnippet
 
+snippet react-router-route-component "router route"
+// react
+import React from 'react';
+
+// react-router
+import {
+	Route,
+} from 'react-router-dom';
+
+import ${1:Home} from 'app/${2}';
+
+export class ${3}Route extends React.Component {
+	render() {
+		return <div>
+			<Route path={'${4}'} component={${1}}/>
+		</div>;
+	}
+}
+endsnippet
+
 
 # redux
 snippet react-redux-map-import "bindActionCreators, connect"
@@ -132,14 +152,16 @@ export const ac${1} = ({
 endsnippet
 
 snippet react-redux-module-reducer
-import _clone from 'lodash.clonedeep';
+import {
+	cloneDeep,
+} from 'lodash-es';
 
 import {
 	AT_${1:USER},
 } from './action';
 
 export default function (state = {}, action) {
-	let _state = _clone(state);
+	let _state = cloneDeep(state);
 	switch (action.type) {
 		case AT_$1.${2:GET_LIST_SUCCESS}:
 			return {
