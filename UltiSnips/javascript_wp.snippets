@@ -1,0 +1,131 @@
+snippet wp-redux-page-create "weapp redux create page"
+import {
+	connect,
+} from 'utils/weapp-redux';
+import {
+	bindActionCreators,
+} from 'redux';
+import {
+	acs,
+} from '@petkit/redux';
+
+const pageConfig = {
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+	
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+	
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+	
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+	
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+	
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+	
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+	
+	}
+};
+
+const mapStateToData = state => ({
+
+});
+
+const mapDispatchToPage = dispatch => bindActionCreators({
+
+}, dispatch);
+
+Page(connect(mapStateToData, mapDispatchToPage)(pageConfig));
+endsnippet
+
+snippet wp-redux-gen-handler "weapp redux generate handler"
+import {
+	call,
+	put,
+} from 'redux-saga/effects';
+import {
+	gen,
+} from '../gen';
+
+export const ats = {
+	${4}: 'AT_${5}',
+};
+
+export const ${1}Handler = () => {
+	gen({
+		path: '${2}',
+		initialState: {
+			${3}
+		}
+	}, [{
+		type: ats.$4,
+		actionCreators: {
+		},
+		reducer: (state, action) => {
+		},
+		saga: function* (action, acs) {
+		},
+	}]);
+};
+endsnippet
+
+snippet wp-redux-gen-handler-item
+{
+	type: ats$1,
+	actionCreators: {
+		$2
+	},${3:
+	reducer: (state, action) => {
+	},}${4:
+	saga: function* (action, acs) {
+	},}
+}
+endsnippet
+

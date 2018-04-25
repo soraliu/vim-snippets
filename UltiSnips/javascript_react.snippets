@@ -218,18 +218,16 @@ endsnippet
 
 
 # fetch
-snippet react-fetch-create "import ..."
-import Fetch from '../fetch';
-
-let api = {
-	${1}: {
+snippet react-fetch-async
+export const ${1} = async () => {
+	let config = {
 		url: '${2}',
-		method: '${3}',
-	}
-};
-
-export const $1 = async () => {
-	let config = api.$1;
+		method: '${3}',${4:
+		data: {
+		},}${5:
+		params: {
+		},}
+	};
 	let data = await Fetch.request(config);
 	return data;
 };
