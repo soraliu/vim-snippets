@@ -152,7 +152,6 @@ import {
 	Component,
 	OnInit,
 	OnDestroy,
-	ViewEncapsulation,
 } from '@angular/core';
 import {
 	Subscription,
@@ -170,8 +169,6 @@ import {
 @Component({
 	selector: 'common-${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}',
 	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
-	styleUrls: [ './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.scss'],
-	encapsulation: ViewEncapsulation.Emulated,
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, NCommon.CompRx {
 	subs: Subscription[] = [];
@@ -188,7 +185,7 @@ export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy, NCommon
 		this.subs.map(sub => sub.unsubscribe());
 	}
 
-	private initObs() {
+	initObs() {
 		this.subs.push(this.${2/(\w+)/\l$1/g}Service.${3}.subscribe(() => {
 		}));
 	}
