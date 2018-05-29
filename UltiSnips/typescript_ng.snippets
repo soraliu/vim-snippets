@@ -419,7 +419,8 @@ import {
 export class ListComponent implements OnInit, OnDestroy {
 	compTableOption: ICompTableOption;
 	compPagingState: BehaviorSubject<ICompPagingState<any>> = new BehaviorSubject<ICompPagingState<any>>(new CompPagingState());
-	rx: Subscription[] = [];
+
+	private _subs: Subscription[] = [];
 
 	constructor(
 		public router: Router,
@@ -433,7 +434,7 @@ export class ListComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.rx.map(obs => obs.unsubscribe());
+		this._subs.map(obs => obs.unsubscribe());
 	}
 
 	private _initTable() {
