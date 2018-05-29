@@ -374,3 +374,147 @@ set $1(_$1) {
 	}
 }
 endsnippet
+
+
+snippet ng2-comp-table
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+	ViewEncapsulation
+} from '@angular/core';
+import {
+	ActivatedRoute,
+	Router,
+} from '@angular/router';
+import {
+	BehaviorSubject,
+	Subscription
+} from 'rxjs';
+import {
+	AddonOption,
+	AddonSearchOption,
+	AddonDateOption,
+	CompTableOption,
+	CompTableState,
+	ICompPagingState,
+	ICompTableOption,
+	ICompTableState,
+	ICompTableStateChange,
+	TableBtnOptColDefOption,
+	TableBtnOptColMenuOption,
+	TableColDefOption,
+	TableEditColDefOption,
+	TableOption,
+	TableState,
+	CompPagingState,
+} from '@petkit/material';
+
+// list
+@Component({
+	selector: 'common-foster-bonus-list',
+	templateUrl: './list.component.html',
+	styleUrls: [ './list.component.scss'],
+})
+export class ListComponent implements OnInit, OnDestroy {
+	compTableOption: ICompTableOption;
+	compPagingState: BehaviorSubject<ICompPagingState<any>> = new BehaviorSubject<ICompPagingState<any>>(new CompPagingState());
+	rx: Subscription[] = [];
+
+	constructor(
+		public router: Router,
+		public route: ActivatedRoute,
+	) {
+		this._initTable();
+		this._initTableData();
+	}
+
+	ngOnInit() {
+	}
+
+	ngOnDestroy() {
+		this.rx.map(obs => obs.unsubscribe());
+	}
+
+	private _initTable() {
+		this.compTableOption = new CompTableOption({
+				addon: new AddonOption({
+					date: new AddonDateOption({
+						hidden: false,
+						value: [
+							new Date(),
+							new Date(),
+						]
+					}),
+					title: '寄养提成',
+					search: new AddonSearchOption({
+						hidden: false,
+						disabled: false,
+						placeholder: '搜索...',
+					}),
+					buttons: [{
+						color: 'primary',
+						text: '添加',
+						onClick: () => {
+							console.log('添加');
+						}
+					}, {
+						color: 'accent',
+						text: '修改',
+						onClick: () => {
+							console.log('修改');
+						}
+					}]
+				}),
+			table: new TableOption({
+				colDef: [
+					new TableColDefOption({
+						col: 'employeeNumber',
+						header: '工号',
+					}),
+					new TableColDefOption({
+						col: 'peopleName',
+						header: '姓名',
+					}),
+					new TableColDefOption({
+						col: 'dailyCheckNum',
+						header: '时间段内总检查次数',
+					}),
+					new TableColDefOption({
+						col: 'dailyCheckCommissionSum',
+						header: '时间段内总提成金额',
+					}),
+					new TableBtnOptColDefOption({
+						header: '操作',
+						menus: [
+							new TableBtnOptColMenuOption({
+								color: 'primary',
+								text: '查看详情',
+								onClick: ({
+									row,
+								}) => {
+									this.router.navigate(['update', row.id], {
+										relativeTo: this.route.parent,
+									});
+								}
+							}),
+						]
+					}),
+				]
+			})
+		});
+	}
+
+	private _initTableData() {
+		const value = this.compPagingState.value;
+		value.data = [{
+			'employeeNumber': '0010',
+			'peopleName': '邓波儿',
+			'systemUserId': 1175,
+			'dailyCheckNum': 1,
+			'dailyCheckCommissionSum': 17.5
+		}];
+		this.compPagingState.next(value);
+	}
+}
+endsnippet
