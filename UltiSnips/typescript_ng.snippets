@@ -147,6 +147,33 @@ export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy {
 }
 endsnippet
 
+snippet ng2-@pipe "angular2 pipe"
+import {
+	Pipe,
+	PipeTransform,
+} from '@angular/core';
+
+@Pipe({
+	name: '${1:pipeName}',
+})
+export class ${1/(\w+)\s?/\u$1/g}Pipe implements PipeTransform {
+	transform(value): string {
+		let result;
+
+		switch (value) {
+			case ${2}: {
+				result = ${3};
+				break;
+			}
+			default:
+				result = '';
+		}
+
+		return result;
+	}
+}
+endsnippet
+
 snippet ng2-@component-common-rx "angular2 common component rx"
 import {
 	Component,
@@ -510,7 +537,7 @@ export class ListComponent implements OnInit, OnDestroy {
 		const value = this.compPagingState.value;
 		value.data = [{
 			'employeeNumber': '0010',
-			'peopleName': '邓波儿',
+			'peopleName': 'sora',
 			'systemUserId': 1175,
 			'dailyCheckNum': 1,
 			'dailyCheckCommissionSum': 17.5
