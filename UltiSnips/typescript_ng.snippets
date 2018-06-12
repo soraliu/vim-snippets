@@ -13,6 +13,8 @@ import {
 	],
 	exports: [
 	],
+	entryComponents: [
+	],
 })
 export class ${1}Module { }
 endsnippet
@@ -119,6 +121,28 @@ const routes: Routes = [{
 	exports: [RouterModule]
 })
 export class ${1/(\w+)\s?/\u$1/g}RoutingModule { }
+endsnippet
+
+snippet ng2-@component-simple "simple angular2 @Component"
+import {
+	Component,
+	OnInit,
+	OnDestroy,
+} from '@angular/core';
+
+// ${1:componentName}
+@Component({
+	selector: 'app${1/(\w+)\s?/-\L$1\E/g}',
+	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
+})
+export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy {
+	constructor(${0}) {
+	}
+	ngOnInit() {
+	}
+	ngOnDestroy() {
+	}
+}
 endsnippet
 
 snippet ng2-@component "angular2 @Component"
@@ -416,12 +440,15 @@ import {
 } from '@angular/router';
 import {
 	BehaviorSubject,
-	Subscription
+	Subscription,
+	of,
 } from 'rxjs';
 import {
 	AddonOption,
 	AddonSearchOption,
 	AddonDateOption,
+	AddonFiltersOption,
+	AddonExportOption,
 	CompTableOption,
 	CompTableState,
 	ICompPagingState,
@@ -480,6 +507,18 @@ export class ListComponent implements OnInit, OnDestroy {
 						disabled: false,
 						placeholder: '搜索...',
 					}),
+					filters: [new AddonFiltersOption({
+						col: 'status',
+						placeholder: '状态',
+						multiple: true,
+						data: of([{
+							value: 1,
+							text: '启用',
+						}, {
+							value: 0,
+							text: '禁用',
+						}]),
+					})],
 					buttons: [{
 						color: 'primary',
 						text: '添加',
@@ -492,7 +531,10 @@ export class ListComponent implements OnInit, OnDestroy {
 						onClick: () => {
 							console.log('修改');
 						}
-					}]
+					}],
+					exports: new AddonExportOption({
+						hidden: true,
+					}),
 				}),
 			table: new TableOption({
 				colDef: [
@@ -511,6 +553,26 @@ export class ListComponent implements OnInit, OnDestroy {
 					new TableColDefOption({
 						col: 'dailyCheckCommissionSum',
 						header: '时间段内总提成金额',
+					}),
+					new TableEditColDefOption({
+						col: 'status',
+						header: '角色状态',
+						editOption: {
+							type: 'slide-toggle',
+							editable: true,
+							override: true,
+							formOption: {
+								text: of(['禁用', '启用']),
+								color: 'primary',
+							}
+						},
+						formValueChange: ({
+							row,
+						}) => {
+							if (row.status !== row._statusFormValue) {
+								console.log('status change: ', row);
+							}
+						},
 					}),
 					new TableBtnOptColDefOption({
 						header: '操作',

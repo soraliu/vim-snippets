@@ -24,13 +24,13 @@ endsnippet
 
 snippet ng2-mat-form-input "form input"
 <mat-form-field>
-	<input matInput placeholder="${0}">
+	<input matInput placeholder="${0}"/>
 </mat-form-field>
 endsnippet
 
 snippet ng2-mat-form-password "form password"
 <mat-form-field>
-	<input matInput placeholder="密码" [type]="show ? 'text' : 'password'">
+	<input matInput placeholder="密码" [type]="show ? 'text' : 'password'"/>
 	<mat-icon matSuffix (click)="show = !show">{{show ? 'visibility' : 'visibility_off'}}</mat-icon>
 </mat-form-field>
 endsnippet
@@ -83,4 +83,14 @@ snippet ng2-mat-card
 		<button mat-button>${6}</button>
 	</mat-card-actions>
 </mat-card>
+endsnippet
+
+
+# ---------------------- angular2 material component -------------------------
+snippet ng2-mat-table-ext
+<mat-table-ext
+	[option]="compTableOption"
+	[pagingState]="compPagingState"
+></mat-table-ext>
+
 endsnippet
