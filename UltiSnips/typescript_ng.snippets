@@ -136,12 +136,9 @@ import {
 	templateUrl: './${1/(\w+)(\s)?/(?2:\L$1\E-:\L$1\E)/g}.component.html',
 })
 export class ${1/(\w+)\s?/\u$1/g}Component implements OnInit, OnDestroy {
-	constructor(${0}) {
-	}
-	ngOnInit() {
-	}
-	ngOnDestroy() {
-	}
+	constructor(${0}) {}
+	ngOnInit() {}
+	ngOnDestroy() {}
 }
 endsnippet
 
@@ -380,12 +377,14 @@ import {
 	Injectable
 } from '@angular/core';
 
-@Injectable()
+@Injectable({
+	providedIn: 'root',
+})
 export class ${1}Service {
 	constructor(
-	) { }
-	${0}
+	) {}
 }
+
 endsnippet
 
 
