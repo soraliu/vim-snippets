@@ -120,13 +120,17 @@ snippet wp-redux-gen-handler-item
 {
 	type: ats$1,
 	actionCreators: {
-		$2
-	},${3:
+		$2(${3:data}) {
+			return {
+				payload: $3,
+			};
+		}
+	},${4:
 	reducer: (state, action) => {
 		return {
 			...state,
 		};
-	},}${4:
+	},}${5:
 	saga: function* (action, acs) {
 	},}
 }
