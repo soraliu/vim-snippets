@@ -5,3 +5,49 @@ $warn: map-get($theme, warn);
 $foreground: map-get($theme, foreground);
 $background: map-get($theme, background);
 endsnippet
+
+snippet css-triangle
+.triangle {
+	$width: 10px;
+	$top: 20px;
+
+	position: relative;
+	height: 100px;
+	width: 100px;
+	border: 1px solid #bbb;
+
+	&::before {
+		content: '';
+		position: absolute;
+		left: 100%;
+		top: $top;
+		width: 0;
+		height: 0;
+		border: $width solid transparent;
+		border-left-color: #bbb;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: 100%;
+		top: $top + 1px;
+		width: 0;
+		height: 0;
+		border: ($width - 1px) solid transparent;
+		border-left-color: #fff;
+	}
+}
+
+endsnippet
+
+snippet saas-component-theme
+@mixin ${1}-theme {
+	.saas-$1 {
+		$2
+	}
+}
+
+@include $1-theme();
+$0
+endsnippet
