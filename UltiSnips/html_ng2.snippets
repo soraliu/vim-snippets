@@ -94,3 +94,21 @@ snippet ng2-mat-table-ext
 ></mat-table-ext>
 
 endsnippet
+
+
+# ---------------------- angular2 material component -------------------------
+snippet ng2-mat-dialog
+<h2 mat-dialog-title>${1}</h2>
+
+<mat-dialog-content>
+	${2}
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close>取消</button>
+	<button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>确认</button>
+</mat-dialog-actions>
+
+endsnippet
+
+
