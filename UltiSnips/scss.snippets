@@ -43,11 +43,24 @@ endsnippet
 
 snippet saas-component-theme
 @mixin ${1}-theme {
-	.saas-$1 {
+	.saas-$1() {
 		$2
 	}
 }
 
 @include $1-theme();
+$0
+endsnippet
+
+snippet mp-page-theme
+@import 'config/theme';
+
+@mixin ${1}-theme($theme) {
+	.mp-crown-$1 {
+		$2
+	}
+}
+
+@include $1-theme($app-theme);
 $0
 endsnippet
