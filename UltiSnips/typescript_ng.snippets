@@ -471,7 +471,7 @@ import {
 })
 export class ListComponent implements OnInit, OnDestroy {
 	compTableOption: ICompTableOption;
-	compPagingState: BehaviorSubject<ICompPagingState<any>> = new BehaviorSubject<ICompPagingState<any>>(new CompPagingState());
+	compPagingState$: BehaviorSubject<ICompPagingState<any>> = new BehaviorSubject<ICompPagingState<any>>(new CompPagingState());
 
 	private _subs: Subscription[] = [];
 
@@ -595,7 +595,7 @@ export class ListComponent implements OnInit, OnDestroy {
 	}
 
 	private _initTableData() {
-		const value = this.compPagingState.value;
+		const value = this.compPagingState$.value;
 		value.data = [{
 			'employeeNumber': '0010',
 			'peopleName': 'sora',
@@ -603,7 +603,7 @@ export class ListComponent implements OnInit, OnDestroy {
 			'dailyCheckNum': 1,
 			'dailyCheckCommissionSum': 17.5
 		}];
-		this.compPagingState.next(value);
+		this.compPagingState$.next(value);
 	}
 }
 endsnippet
