@@ -1,0 +1,56 @@
+priority 50
+
+# next
+
+snippet next-create-page "Create empty page"
+const ${1:Page} = () => {
+	return <div>
+		$2
+	</div>;
+};
+
+export default $1;
+$0
+endsnippet
+
+
+snippet next-create-component "Create empty page"
+const ${1} = () => {
+	return ${2:<div>
+		${3}
+	</div>;}
+};
+$0
+endsnippet
+
+
+snippet next-import-link
+import Link from 'next/link';
+endsnippet
+
+
+snippet next-import-head
+import Head from 'next/head';
+endsnippet
+
+
+snippet next-import-fetch
+import fetch from 'isomorphic-fetch';
+endsnippet
+
+
+snippet next-import-router
+import Router, { useRouter } from 'next/router';
+endsnippet
+
+
+snippet next-imports "import useful libs"
+import React, {useState, useEffect} from 'react';
+
+import Link from 'next/link';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+import fetch from 'isomorphic-fetch';
+endsnippet
+
