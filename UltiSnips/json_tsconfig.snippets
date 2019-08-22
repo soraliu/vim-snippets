@@ -1,0 +1,22 @@
+# Snippet for tsconfig
+
+priority -50
+
+snippet tsconfig-json-umi "umi's tsconfig"
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"jsx": "preserve",
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"allowSyntheticDefaultImports": true
+	}
+}
+endsnippet
