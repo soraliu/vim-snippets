@@ -1,0 +1,30 @@
+priority -50
+
+# umi
+snippet egg-sequelize-transaction
+try {
+	const result = await ctx.model.transaction(async () => {${1}});
+	return result;
+} catch (err) {
+	let handledErr;
+	${2}
+	throw handledErr || err;
+}$0
+endsnippet
+
+snippet egg-sequelize-update
+await ctx.model.${1}.update({ ${2} }, { where: { ${3} } });
+endsnippet
+
+snippet egg-controller-try-catch
+try {
+	const data = await this.ctx.service.${1}({
+		${2}
+	});
+
+	this.ctx.body = [data];
+} catch (error) {
+	this.ctx.body = error;
+}
+endsnippet
+
