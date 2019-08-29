@@ -184,8 +184,20 @@ try {
 }$0
 endsnippet
 
+snippet egg-sequelize-findAll
+await ctx.model.${1}.findAll({ where: { ${2} } });
+endsnippet
+
+snippet egg-sequelize-create
+await ctx.model.${1}.create({ ${2} });
+endsnippet
+
 snippet egg-sequelize-update
 await ctx.model.${1}.update({ ${2} }, { where: { ${3} } });
+endsnippet
+
+snippet egg-sequelize-delete
+await ctx.model.${1}.destroy({ where: { ${3} } });
 endsnippet
 
 snippet egg-controller-try-catch
