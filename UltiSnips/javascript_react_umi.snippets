@@ -1,15 +1,24 @@
 priority -50
 
 # umi
-snippet umi-create-page "Create empty page"
+snippet umi-component-create "Create empty page"
+import PropTypes from 'prop-types';
+
 import styles from './index.less';
 
-const ${1:Page} = () => {
+const ${1:Component} = ({
+	${2}
+}) => {
 	return (
 		<div>
-			$2
+			${3}
 		</div>
 	);
+};
+
+
+Header.propTypes = {
+	$2
 };
 
 export default $1;

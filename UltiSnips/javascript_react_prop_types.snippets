@@ -1,0 +1,87 @@
+priority -50
+
+# react prop types
+snippet react-prop-types-array
+PropTypes.array
+endsnippet
+snippet react-prop-types-boolean
+PropTypes.bool
+endsnippet
+snippet react-prop-types-function
+PropTypes.func
+endsnippet
+snippet react-prop-types-number
+PropTypes.number
+endsnippet
+snippet react-prop-types-object
+PropTypes.object
+endsnippet
+snippet react-prop-types-string
+PropTypes.string
+endsnippet
+snippet react-prop-types-symbol
+PropTypes.symbol
+endsnippet
+snippet react-prop-types-any "A value of any data type"
+PropTypes.any
+endsnippet
+
+snippet react-prop-types-array-required
+PropTypes.array.isRequired
+endsnippet
+snippet react-prop-types-boolean-required
+PropTypes.bool.isRequired
+endsnippet
+snippet react-prop-types-function-required
+PropTypes.func.isRequired
+endsnippet
+snippet react-prop-types-number-required
+PropTypes.number.isRequired
+endsnippet
+snippet react-prop-types-object-required
+PropTypes.object.isRequired
+endsnippet
+snippet react-prop-types-string-required
+PropTypes.string.isRequired
+endsnippet
+snippet react-prop-types-symbol-required
+PropTypes.symbol.isRequired
+endsnippet
+snippet react-prop-types-any-required "A value of any data type"
+PropTypes.any.isRequired
+endsnippet
+
+snippet react-prop-types-node "Anything that can be rendered: numbers, strings, elements or an array"
+PropTypes.node
+endsnippet
+snippet react-prop-types-element "A React element (ie. <MyComponent />)."
+PropTypes.element
+endsnippet
+snippet react-prop-types-element-type "A React element type (ie. MyComponent)."
+PropTypes.elementType
+endsnippet
+snippet react-prop-types-instance-of "You can also declare that a prop is an instance of a class."
+PropTypes.instanceOf(${1:Class})
+endsnippet
+snippet react-prop-types-one-of "You can ensure that your prop is limited to specific values by treating it as an enum"
+PropTypes.oneOf([${1}])
+endsnippet
+snippet react-prop-types-one-of-type  "An object that could be one of many types"
+PropTypes.oneOfType([
+	${1}
+])$0
+endsnippet
+
+snippet react-prop-types-array-of "An array of a certain type"
+PropTypes.arrayOf(${1})
+endsnippet
+snippet react-prop-types-object-of "An object with property values of a certain type"
+PropTypes.objectOf(${1})
+endsnippet
+
+snippet react-prop-types-shape "An object taking on a particular shape"
+PropTypes.shape({
+	${1}
+})$0
+endsnippet
+
