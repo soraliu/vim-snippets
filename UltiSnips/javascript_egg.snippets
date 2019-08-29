@@ -1,6 +1,178 @@
 priority -50
 
-# umi
+# egg
+snippet egg-model-create "create egg model"
+module.exports = app => {
+	const { STRING, INTEGER, DATE } = app.Sequelize;
+
+	const ${1/\w/\u$0/} = app.model.define('${1}', {
+		id: {
+			type: INTEGER,
+			primaryKey: true,
+			autoIncrement: true,
+		},
+		${2:name: {
+			type: STRING,
+		},
+		}createdAt: DATE,
+	});
+
+	return ${1/\w/\u$0/};
+};
+endsnippet
+
+snippet egg-service-create "create egg service"
+const Service = require('egg').Service;
+
+class ${1}Service extends Service {
+	async list() {
+		const ctx = this.ctx;
+
+		return await ctx.model.$1.findAll(${2:{
+			attributes: ['id', '$4'],
+			where: { ${3} },
+		}});
+	}
+
+	async create({
+		${4}
+	}) {
+		const ctx = this.ctx;
+
+		try {
+			return await ctx.model.$1.create({
+				$4
+			});
+		} catch (err) {
+			throw ctx.helper.sqlErrHandler(err);
+		}
+	}
+
+	async update({
+		id,
+		$4
+	}) {
+		const ctx = this.ctx;
+
+		try {
+			await this._isExist({ id });
+			await ctx.model.$1.update({
+				$4
+			}, { where: { id } });
+		} catch (err) {
+			throw ctx.helper.sqlErrHandler(err);
+		}
+	}
+
+	async deleteById({
+		id,
+	}) {
+		const ctx = this.ctx;
+
+		try {
+			await this._isExist({ id });
+
+			await ctx.model.$1.update({ deleted: 1 }, { where: { id } });
+		} catch (err) {
+			throw ctx.helper.sqlErrHandler(err);
+		}
+	}
+
+	async _isExist({
+		id,
+	}) {
+		const ctx = this.ctx;
+
+		const finded = await ctx.model.$1.findByPk(id);
+		if (!finded) {
+			throw {
+				code: 100101,
+				placeholder: ['id', id],
+			};
+		}
+	}
+}
+
+module.exports = $1Service;
+endsnippet
+
+snippet egg-controller-create "create egg controller"
+const Controller = require('egg').Controller;
+
+class ${1}Controller extends Controller {
+	async list() {
+		this.ctx.body = [await this.ctx.service.${1/\w/\l$0/}.list()];
+	}
+
+	async create() {
+		const {
+			${2}
+		} = this.ctx.request.body;
+
+		if (!$2) {
+			this.ctx.body = {
+				code: 100000,
+				placeholder: [
+					'$2'
+				],
+			};
+			return;
+		}
+
+		try {
+			const createdRow = await this.ctx.service.${1/\w/\l$0/}.create({
+				$2
+			});
+
+			this.ctx.body = [createdRow];
+		} catch (error) {
+			this.ctx.body = error;
+		}
+	}
+
+	async updateById() {
+		const {
+			$2
+		} = this.ctx.request.body;
+		const { id } = this.ctx.params;
+
+		try {
+			const updatedRow = await this.ctx.service.${1/\w/\l$0/}.update({
+				id,
+				$2
+			});
+
+			this.ctx.body = [updatedRow];
+		} catch (error) {
+			this.ctx.body = error;
+		}
+	}
+
+	async deleteById() {
+		const { id } = this.ctx.params;
+
+		try {
+			const deletedRow = await this.ctx.service.${1/\w/\l$0/}.deleteById({
+				id,
+			});
+
+			this.ctx.body = [deletedRow];
+		} catch (error) {
+			this.ctx.body = error;
+		}
+	}
+}
+
+module.exports = $1Controller;
+endsnippet
+
+snippet egg-routes-entity-create "create entity routes"
+router.get(\`\${prefix}/${1}\`, controller.$1.list);
+router.post(\`\${prefix}/$1\`, controller.$1.create);
+router.put(\`\${prefix}/$1/:id\`, controller.$1.updateById);
+router.delete(\`\${prefix}/$1/:id\`, controller.$1.deleteById);
+endsnippet
+
 snippet egg-sequelize-transaction
 try {
 	const result = await ctx.model.transaction(async () => {${1}});

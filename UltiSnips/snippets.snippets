@@ -18,4 +18,12 @@ snippet vis "${VISUAL}" i
 \$\{VISUAL${1:${2:default}${3:/transform/}}\}
 endsnippet
 
+snippet to-upper-case
+\${${1}/\w/\u\$0/}
+endsnippet
+
+snippet to-lower-case
+\${${1}/\w/\l\$0/}
+endsnippet
+
 # vim:ft=snippets:
