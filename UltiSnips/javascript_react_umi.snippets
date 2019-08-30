@@ -17,10 +17,76 @@ const ${1:Component} = ({
 };
 
 
-Header.propTypes = {
+$1.propTypes = {
 	$2
 };
 
 export default $1;
+endsnippet
+
+snippet umi-service-create "create umi service"
+import request from '@/utils/request';
+
+export const list = async () => await request('/${1}');
+
+export const create = async body => await request('/$1', {
+		method: 'POST',
+		body: JSON.stringify(body),
+	});
+
+export const updateById = async (id, body) => await request(\`/$1/\${id}\`, {
+		method: 'PUT',
+		body: JSON.stringify(body),
+	});
+
+export const deleteById = async id => await request(\`/$1/\${id}\`, { method: 'DELETE' });
+endsnippet
+
+snippet umi-model-create-crud "create umi model"
+import { list, create, updateById, deleteById } from './service';
+
+export default {
+	namespace: '${1}List',
+	state: {
+		data: [],
+		loading: false,
+	},
+	reducers: {
+		save(state, { payload }) {
+			return { ...state, ...payload };
+		},
+	},
+	effects: {
+		*list(action, { call, put }) {
+			yield put({ type: 'save', payload: { loading: true } });
+			const data = yield call(list);
+			yield put({ type: 'save', payload: { loading: false, data } });
+		},
+		*create({ payload: { values } }, { call, put }) {
+			yield call(create, values);
+			yield put({ type: 'reload' });
+		},
+		*updateById({ payload: { id, values } }, { call, put }) {
+			yield call(updateById, id, values);
+			yield put({ type: 'reload' });
+		},
+		*deleteById({ payload: { id } }, { call, put }) {
+			yield call(deleteById, id);
+			yield put({ type: 'reload' });
+		},
+		*reload(action, { put }) {
+			yield put({ type: 'list' });
+		},
+	},
+	subscriptions: {
+		setup({ dispatch, history }) {
+			return history.listen(({ pathname }) => {
+				if (pathname === '/$1') {
+					dispatch({ type: 'list' });
+				}
+			});
+		},
+	},
+};
 endsnippet
 

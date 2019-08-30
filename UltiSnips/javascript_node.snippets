@@ -63,3 +63,7 @@ snippet stderr "stderr"
 process.stderr
 endsnippet
 
+
+snippet fs-read-file-sync
+let data = fs.readFileSync(path.join(__dirname, ${1}), { encoding: 'utf8' });
+endsnippet
