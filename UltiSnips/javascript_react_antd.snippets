@@ -1,0 +1,37 @@
+priority -50
+
+# antd
+snippet antd-modal-simple-create
+// modal visible
+const [visible, setVisible] = useState(false);
+
+// modal click
+const handleOk = () => {
+	setVisible(false);
+};
+const handleCancel = () => {
+	setVisible(false);
+};
+
+return (
+	<div>
+		<Button
+			block
+			icon="plus"
+			type="primary"
+			onClick={() => setVisible(true)}
+		/>
+
+		<Modal
+			title="Basic Modal"
+			visible={visible}
+			onOk={handleOk}
+			onCancel={handleCancel}
+		>
+			<p>Some contents...</p>
+			<p>Some contents...</p>
+			<p>Some contents...</p>
+		</Modal>
+	</div>
+);
+endsnippet
