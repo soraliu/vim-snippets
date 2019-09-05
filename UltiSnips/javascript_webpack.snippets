@@ -1,0 +1,58 @@
+priority 50
+
+snippet webpack-plugin-create
+const { ReplaceSource } = require('webpack-sources');
+
+const getReplacedSource = ({ sourceAsset, matchReg, replacement }) => {
+	const replaceSource = new ReplaceSource(sourceAsset);
+	const source = sourceAsset.source();
+
+	if (typeof source !== 'string') {
+		return sourceAsset;
+	}
+
+	[...matchAll(source, matchReg)].forEach((match) => {
+		const matchedStr = match[0];
+		const start = match.index;
+		const end = start + matchedStr.length;
+
+		replaceSource.replace(start, end, replacement);
+	});
+
+	return replaceSource;
+}
+
+class ${1}WebpackPlugin {
+	constructor(options) {}
+
+	apply(compiler) {
+		compiler.hooks.compilation.tap('$1WebpackPlugin', compilation => {
+			compilation.hooks.chunkAsset.tap('$1WebpackPluginChunkAsset', (chunk, filename) => {
+				// filter node_modules
+				if (/node_modules\//.test(filename)) {
+					return;
+				}
+
+				// current chunk's bundle code
+				const sourceAsset = compilation.assets[filename];
+
+				// current chunk's dependencies of module in src directory
+				const srcModules = Array.from(chunk._modules)
+					.filter(chunk => chunk.type !== 'javascript/dynamic')
+					.filter(({ id }) => !/node_modules\//.test(id));
+
+				srcModules.forEach(({ _source }) => {
+					if (!_source) return [];
+
+					// module's source code
+					const { _value } = _source;
+
+					${2}
+				});
+			});
+		});
+	}
+}
+
+module.exports = $1WebpackPlugin;
+endsnippet

@@ -54,3 +54,12 @@ import { useRouter } from 'next/router';
 import fetch from 'isomorphic-fetch';
 endsnippet
 
+snippet next-webpack-config-entry
+const oldEntry = config.entry;
+config.entry = () => oldEntry().then(entry => {
+	console.log('--------entry start--------');
+	console.log(entry);
+	console.log('--------entry end--------');
+	return entry;
+});
+endsnippet
