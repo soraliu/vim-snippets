@@ -1,0 +1,12 @@
+priority -50
+
+extends javascript
+
+
+snippet ts_type_without "without prop"
+type without${1}<P> =
+	'${2}' extends keyof P
+			? Pick<P, Exclude<keyof P, '$2'>>
+			: P;
+endsnippet
+

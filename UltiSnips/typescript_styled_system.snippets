@@ -1,0 +1,15 @@
+priority -50
+
+extends javascript
+
+snippet styled-system-forward-ref
+const ${1} = forwardRef((props, ref) => <Box
+	ref={ref}
+	as='${2}'
+	tx='$2'
+	variant='primary'
+	{...props}
+	__css={{$0}}
+/>);
+endsnippet
+
