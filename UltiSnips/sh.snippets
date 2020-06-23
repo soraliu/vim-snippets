@@ -96,4 +96,31 @@ while ${2:[[ ${1:condition} ]]}; do
 done
 endsnippet
 
+snippet args "arguments"
+usage() {
+	echo "usage:
+		[--${1:arg}]
+		[-h]"
+}
+
+while [ "\$1" != "" ]; do
+	case \$1 in
+		--$1 ) shift
+			$1=\$1
+			;;
+		-b | --bool )
+			bool="true"
+			;;
+		-h | --help )
+			usage
+			exit
+			;;
+		* )
+			usage
+			exit 1
+	esac
+	shift
+done
+endsnippet
+
 # vim:ft=snippets:

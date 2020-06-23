@@ -37,56 +37,56 @@ define([
 ], function(app) {
 	app.service('$1DS', function($notify) {
 		let ajax = {
-		};
+		}
 
-		this.ajax = ajax;
-	});
+		this.ajax = ajax
+	})
 	app.controller('${1}Controller', function($scope, $notify, $1DS) {
 		let data = {
 			stateInit() {
 				$scope.state = {
 					${2}
-				};
+				}
 			},
 			async async${3}() {
 				${0}
 
-				// $scope.$apply();
+				// $scope.$apply()
 			},
 			asyncInit() {
-				this.async$3();
+				this.async$3()
 			},
 			init() {
-				this.stateInit();
-				this.asyncInit();
+				this.stateInit()
+				this.asyncInit()
 			}
-		};
+		}
 		let event = {
 			init() {
 			}
-		};
+		}
 
-		data.init();
-		event.init();
-	});
-});
+		data.init()
+		event.init()
+	})
+})
 endsnippet
 snippet require-ng-fetch
 define(['angular', 'app', 'apiConstant', 'ajax'], function(angular, app, api) {
 
 	app.factory('${1}', function(ajax) {
-		let service = {};
+		let service = {}
 
 		service.${2} = (${3:data}) => {
-			let config = api.${4};
-			config.${5:params:data} = data;
-			return ajax.request(config);
-		};
+			let config = api.${4}
+			config.${5:params:data} = data
+			return ajax.request(config)
+		}
 
-		return service;
-	});
+		return service
+	})
 
-});
+})
 endsnippet
 
 
@@ -94,17 +94,17 @@ endsnippet
 # ---------------------- fetch -------------------------
 snippet ng-fetch-service
 ${1:service}.${2} = (${3:data}) => {
-	let config = api.${4};
-	config.${5:params:data} = data;
-	return ajax.request(config);
-};
+	let config = api.${4}
+	config.${5:params:data} = data
+	return ajax.request(config)
+}
 endsnippet
 snippet ng-fetch-fn
 async ${1}() {
 	try {
-		await ${2};
+		await ${2}
 	} catch(e) {
-		$notify.error(e.message || (e.error && e.error.message) || e);
+		$notify.error(e.message || (e.error && e.error.message) || e)
 	}
 },
 endsnippet
@@ -117,27 +117,27 @@ app.filter('${1}', function() {
 	return function(data) {
 		switch (data) {
 			case ${2}: {
-				return ${3};
+				return ${3}
 			}
 			default: {
-				return ${0};
+				return ${0}
 			}
 		}
-	};
-});
+	}
+})
 endsnippet
 snippet ng-service
 app.service('${1}', function() {
-	this.${2} = ${0};
-});
+	this.${2} = ${0}
+})
 endsnippet
 snippet ng-service-ds
 app.service('${1}DS', function($notify) {
 	let ajax = {
-	};
+	}
 
-	this.ajax = ajax;
-});
+	this.ajax = ajax
+})
 endsnippet
 snippet ng-directive
 // ${1}
@@ -160,32 +160,32 @@ new function() {
 					stateInit() {
 						$scope.state = {
 							${6}
-						};
+						}
 					},
 					async async${7}() {
 						${0}
 
-						// $scope.$apply();
+						// $scope.$apply()
 					},
 					asyncInit() {
-						this.async$7();
+						this.async$7()
 					},
 					init() {
-						this.stateInit();
-						this.asyncInit();
+						this.stateInit()
+						this.asyncInit()
 					}
-				};
+				}
 				let event = {
 					init() {
 					}
-				};
+				}
 
-				data.init();
-				event.init();
+				data.init()
+				event.init()
 			},
 			templateUrl: config.templateUrl
-		};
-	});
+		}
+	})
 }
 endsnippet
 snippet ng-controller
@@ -194,42 +194,42 @@ app.controller('${1}Controller', function($scope) {
 		stateInit() {
 			$scope.state = {
 				${2}
-			};
+			}
 		},
 		async async${3}() {
 			${0}
 
-			//$scope.$apply();
+			//$scope.$apply()
 		},
 		asyncInit() {
-			this.async$3();
+			this.async$3()
 		},
 		init() {
-			this.stateInit();
-			this.asyncInit();
+			this.stateInit()
+			this.asyncInit()
 		}
-	};
+	}
 	let event = {
 		init() {
 		}
-	};
+	}
 
-	data.init();
-	event.init();
-});
+	data.init()
+	event.init()
+})
 endsnippet
 
 
 
 # ---------------------- ng-notify -------------------------
 snippet ng-notify-error
-$notify.error(${0});
+$notify.error(${0})
 endsnippet
 snippet ng-notify-error-msg
-$notify.error(e.message || (e.error && e.error.message) || e);
+$notify.error(e.message || (e.error && e.error.message) || e)
 endsnippet
 snippet ng-notify-success
-$notify.success(${0});
+$notify.success(${0})
 endsnippet
 
 
@@ -240,13 +240,13 @@ let model = $uibModal.open({
 	animation: true,
 	templateUrl: '${1:modal.html}',
 	controller: function($scope) {
-		$scope.header = ${2:''};
+		$scope.header = ${2:''}
 		$scope.onClickOk = () => {
-			$uibModalInstance.close('ok');
-		};
+			$uibModalInstance.close('ok')
+		}
 		$scope.onClickCancel = () => {
-			$uibModalInstance.dismiss('cancel');
-		};
+			$uibModalInstance.dismiss('cancel')
+		}
 	},
 	resolve: {
 		// 数据需要以函数形式传递，不然会报错
@@ -254,7 +254,7 @@ let model = $uibModal.open({
 	}
 })
 	.result
-	.then(${4});
+	.then(${4})
 endsnippet
 
 
@@ -274,17 +274,17 @@ $scope.table = {
 				}],
 				getData: function(params) {
 					let promise = ${7}({page: params.page(), count: params.count()}).then(users => {
-						params.total(users.total);
-						return users.items;
+						params.total(users.total)
+						return users.items
 					}).catch(e => {
-						console.log(e);
-					});
-					return promise;
+						console.log(e)
+					})
+					return promise
 				}
 			},
 		},
 	},
-};
+}
 endsnippet
 snippet ng-table-ext "客户端分页"
 $scope.table = {
@@ -304,7 +304,7 @@ $scope.table = {
 			table: []
 		}
 	},
-};
+}
 endsnippet
 
 
@@ -317,8 +317,8 @@ endsnippet
 # ---------------------- debug -------------------------
 snippet debug-setInterval-console
 setInterval(() => {
-	console.log(${0});
-}, 2000);
+	console.log(${0})
+}, 2000)
 endsnippet
 
 
