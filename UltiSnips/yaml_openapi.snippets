@@ -99,8 +99,70 @@ $0schema:
 					$ref: '#/components/schemas/${3}'
 endsnippet
 
+snippet openapi-operation-crud
+/${1:User}:
+	post:
+		tags:
+			- ${1/\w+\s*/\l$0/}
+		summary: Create a ${1/\w+\s*/\l$0/}
+		operationId: add${1/\w+\s*/\u$0/}
+		requestBody:
+			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
+		responses:
+			201:
+				description: Successful Operation
+				content:
+					application/json:
+						schema:
+							$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
+	get:
+		tags:
+			- ${1/\w+\s*/\l$0/}
+		summary: get ${1/\w+\s*/\l$0/} list
+		operationId: get${1/\w+\s*/\u$0/}List
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}Array'
+/${1/\w+\s*/\l$0/}/{id}:
+	parameters:
+		- name: id
+			in: path
+			required: true
+			schema:
+				type: integer
+				format: int64
+	get:
+		tags:
+			- ${1/\w+\s*/\l$0/}
+		summary: Get a ${1/\w+\s*/\l$0/} by Id
+		operationId: get${1/\w+\s*/\u$0/}ById
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
+	put:
+		tags:
+			- ${1/\w+\s*/\l$0/}
+		summary: Update a ${1/\w+\s*/\l$0/} by Id
+		operationId: update${1/\w+\s*/\u$0/}ById
+		requestBody:
+			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
+	delete:
+		tags:
+			- ${1/\w+\s*/\l$0/}
+		summary: Delete a ${1/\w+\s*/\l$0/} by Id
+		operationId: delete${1/\w+\s*/\u$0/}ById
+		responses:
+			200:
+				$ref: '#/components/responses/NoData'
+endsnippet
+
 snippet openapi-operation-tpl
 $0${1:get}:
+	tags:
+		- ${4}
 	summary: $2
 	operationId: $3
 	parameters:
@@ -218,54 +280,4 @@ components:
 					type: object
 				msg:
 					type: string
-endsnippet
-
-snippet openapi-operation-crud
-/${1:User}:
-	post:
-		summary: Create a ${1/\w+\s*/\l$0/}
-		operationId: add${1/\w+\s*/\u$0/}
-		requestBody:
-			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
-		responses:
-			201:
-				description: Successful Operation
-				content:
-					application/json:
-						schema:
-							$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
-	get:
-		summary: get ${1/\w+\s*/\l$0/} list
-		operationId: get${1/\w+\s*/\u$0/}List
-		responses:
-			200:
-				$ref: '#/components/responses/${1/\w+\s*/\u$0/}Array'
-/${1/\w+\s*/\l$0/}/{id}:
-	parameters:
-		- name: id
-			in: path
-			required: true
-			schema:
-				type: integer
-				format: int64
-	get:
-		summary: Get a ${1/\w+\s*/\l$0/} by Id
-		operationId: get${1/\w+\s*/\u$0/}ById
-		responses:
-			200:
-				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
-	put:
-		summary: Update a ${1/\w+\s*/\l$0/} by Id
-		operationId: update${1/\w+\s*/\u$0/}ById
-		requestBody:
-			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
-		responses:
-			200:
-				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
-	delete:
-		summary: Delete a ${1/\w+\s*/\l$0/} by Id
-		operationId: delete${1/\w+\s*/\u$0/}ById
-		responses:
-			200:
-				$ref: '#/components/responses/NoData'
 endsnippet
