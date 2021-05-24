@@ -1,0 +1,271 @@
+priority -50
+
+snippet openapi-root "create new tpl of openapi"
+openapi: 3.0.0
+info:
+	title: $1
+	version: 0.0.1
+paths:
+	$2
+endsnippet
+
+snippet openapi-requestBodies-with-ref
+$0description: $1
+required: true
+content:
+	application/json:
+		schema:
+			$ref: '#/components/schemas/$2'
+endsnippet
+
+snippet openapi-requestBodies-with-object
+description: $1
+required: true
+content:
+	application/json:
+		schema:
+			type: object
+			required:
+				- id
+			$0properties:
+				id:
+					type: integer
+					format: int64
+endsnippet
+
+snippet openapi-responses-with-object
+description: $1
+content:
+	application/json:
+		schema:
+			type: object
+			required:
+				- id
+			$0properties:
+				id:
+					type: integer
+					format: int64
+endsnippet
+
+snippet openapi-ref-to-schemas
+$ref: '#/components/schemas/$1'
+endsnippet
+
+snippet openapi-ref-to-requestBodies
+$ref: '#/components/requestBodies/$1'
+endsnippet
+
+snippet openapi-ref-to-responses
+$ref: '#/components/responses/$1'
+endsnippet
+
+snippet openapi-schema-with-object
+$0schema:
+	description: $1
+	type: object
+	required:
+		- content
+	properties:
+		id:
+			type: integer
+			format: int64
+		content:
+			type: string
+			example: a string
+		created_at:
+			type: string
+			format: date-time
+		status:
+			type: string
+			enum:
+				- created
+				- finished
+endsnippet
+
+snippet openapi-schema-with-ref
+$0schema:
+	$ref: '#/components/schemas/$1'
+endsnippet
+
+snippet openapi-schema-with-allOf
+$0schema:
+	description: $1
+	type: object
+	allOf:
+		- $ref: '#/components/schemas/${2:APIResponse}'
+		- type: object
+			properties:
+				data:
+					$ref: '#/components/schemas/${3}'
+endsnippet
+
+snippet openapi-operation-tpl
+$0${1:get}:
+	summary: $2
+	operationId: $3
+	parameters:
+		- name: id
+			in: path
+			required: true
+			schema:
+				type: integer
+				format: int64
+	requestBody:
+		$ref: '#/components/requestBodies/$4'
+	responses:
+		200:
+			description: Successful Operation
+			content:
+				application/json:
+					schema:
+						$ref: '#/components/schemas/${4}'
+		201:
+			description: Successful Creation
+			content:
+				application/json:
+					schema:
+						$ref: '#/components/schemas/${4}'
+		202:
+			description: Successful Async Operation
+			content:
+				application/json:
+					schema:
+						$ref: '#/components/schemas/${4}'
+endsnippet
+
+snippet openapi-components-tpl
+components:
+	requestBodies:
+		${1:User}:
+			required: true
+			content:
+				application/json:
+					schema:
+						$ref: '#/components/schemas/${1}'
+	responses:
+		NoData:
+			description: successful operation
+			content:
+				application/json:
+					schema:
+						type: object
+						allOf:
+							- $ref: '#/components/schemas/APIResponse'
+							- type: object
+								properties:
+									data:
+										type: object
+										example: null
+		${1}:
+			description: Successful Operation
+			content:
+				application/json:
+					schema:
+						type: object
+						allOf:
+							- $ref: '#/components/schemas/APIResponse'
+							- type: object
+								properties:
+									data:
+										$ref: '#/components/schemas/${1}'
+		TodoArray:
+			description: Successful Operation
+			content:
+				application/json:
+					schema:
+						type: object
+						allOf:
+							- $ref: '#/components/schemas/APIResponse'
+							- type: object
+								properties:
+									data:
+										type: array
+										items:
+											$ref: '#/components/schemas/${1}'
+	schemas:
+		${1}:
+			type: object
+			required:
+				- content
+			$0properties:
+				id:
+					type: integer
+					format: int64
+				content:
+					type: string
+					example: a string
+				created_at:
+					type: string
+					format: date-time
+				status:
+					type: string
+					description: the status of a${1} 
+					enum:
+						- created
+						- finished
+		APIResponse:
+			description: Standard API response
+			type: object
+			required:
+				- code
+				- data
+				- msg
+			properties:
+				code:
+					type: integer
+					format: int32
+				data:
+					type: object
+				msg:
+					type: string
+endsnippet
+
+snippet openapi-operation-crud
+/${1:User}:
+	post:
+		summary: Create a ${1/\w+\s*/\l$0/}
+		operationId: add${1/\w+\s*/\u$0/}
+		requestBody:
+			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
+		responses:
+			201:
+				description: Successful Operation
+				content:
+					application/json:
+						schema:
+							$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
+	get:
+		summary: get ${1/\w+\s*/\l$0/} list
+		operationId: get${1/\w+\s*/\u$0/}List
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}Array'
+/${1/\w+\s*/\l$0/}/{id}:
+	parameters:
+		- name: id
+			in: path
+			required: true
+			schema:
+				type: integer
+				format: int64
+	get:
+		summary: Get a ${1/\w+\s*/\l$0/} by Id
+		operationId: get${1/\w+\s*/\u$0/}ById
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
+	put:
+		summary: Update a ${1/\w+\s*/\l$0/} by Id
+		operationId: update${1/\w+\s*/\u$0/}ById
+		requestBody:
+			$ref: '#/components/requestBodies/${1/\w+\s*/\u$0/}'
+		responses:
+			200:
+				$ref: '#/components/responses/${1/\w+\s*/\u$0/}'
+	delete:
+		summary: Delete a ${1/\w+\s*/\l$0/} by Id
+		operationId: delete${1/\w+\s*/\u$0/}ById
+		responses:
+			200:
+				$ref: '#/components/responses/NoData'
+endsnippet
