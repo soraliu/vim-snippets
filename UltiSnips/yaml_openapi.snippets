@@ -203,7 +203,7 @@ components:
 			content:
 				application/json:
 					schema:
-						$ref: '#/components/schemas/${1}'
+						$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
 	responses:
 		NoData:
 			description: successful operation
@@ -218,7 +218,7 @@ components:
 									data:
 										type: object
 										example: null
-		${1}:
+		${1/\w+\s*/\u$0/}:
 			description: Successful Operation
 			content:
 				application/json:
@@ -229,8 +229,8 @@ components:
 							- type: object
 								properties:
 									data:
-										$ref: '#/components/schemas/${1}'
-		TodoArray:
+										$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
+		${1/\w+\s*/\u$0/}Array:
 			description: Successful Operation
 			content:
 				application/json:
@@ -243,13 +243,13 @@ components:
 									data:
 										type: array
 										items:
-											$ref: '#/components/schemas/${1}'
+											$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
 	schemas:
-		${1}:
+		${1/\w+\s*/\u$0/}:
 			type: object
 			required:
 				- content
-			$0properties:
+			properties:
 				id:
 					type: integer
 					format: int64
@@ -261,7 +261,7 @@ components:
 					format: date-time
 				status:
 					type: string
-					description: the status of a${1} 
+					description: the status of a ${1/\w+\s*/\l$0/}
 					enum:
 						- created
 						- finished

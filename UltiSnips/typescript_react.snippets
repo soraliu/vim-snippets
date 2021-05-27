@@ -1,0 +1,13 @@
+priority -50
+
+snippet react-component-tpl
+import React, { FC } from 'react';
+
+const ${1}: FC = () => {
+	return <div>
+		${2:$1}
+	</div>;
+};
+
+export default $1;
+endsnippet
