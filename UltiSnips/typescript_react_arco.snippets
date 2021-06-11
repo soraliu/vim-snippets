@@ -1,0 +1,85 @@
+priority -50
+
+snippet arco-component-form-tpl
+import React, { FC } from 'react'
+import { Form } from '@arco-design/web-react'
+
+// global variables
+
+// global functions
+
+// ui components
+const FormItem = Form.Item
+
+// type definitions
+
+const ${1:FormComp}: FC = () => {
+	// use hooks
+	const [form] = Form.useForm()
+
+	// local variables
+
+	// local functions
+
+	// effects
+
+	return (
+		<>
+			<Form
+				form={form}
+				labelCol={{ span: 4 }}
+				wrapperCol={{ span: 20 }}
+				initialValues={{
+					${2}
+				}}
+				onValuesChange={(_, v) => {
+					console.log(v);
+				}}
+			>
+			</Form>
+		</>
+	)
+}
+
+export default $1
+endsnippet
+
+snippet arco-component-form-item
+<FormItem
+	label="${1:Label}"
+	field="${2:field}"
+>
+</FormItem>
+endsnippet
+
+snippet arco-component-form-select-item
+<FormItem
+	labelCol={{ span: 8 }}
+	wrapperCol={{ span: 16 }}
+	label="${1:Label}"
+	field="${2:field}"
+>
+	<Select
+		allowClear
+		showSearch
+		placeholder="please select"
+		options={${3:['a', 'b']}}
+	></Select>
+</FormItem>
+endsnippet
+
+snippet arco-component-form-checkbox-item
+<FormItem nostyle triggerPropName="checked" field="${2:field}">
+	<Checkbox>${3:Text}</Checkbox>
+</FormItem>
+endsnippet
+
+snippet arco-component-select-with-options
+<Select${1: placeholder="Please select"}>
+	{${2:[]}.map(({ display, value }) => (
+		<Option key={value} value={value}>
+			{display}
+		</Option>
+	))}
+</Select>
+endsnippet

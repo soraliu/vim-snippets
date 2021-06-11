@@ -1,0 +1,10 @@
+priority -50
+
+snippet yaml-ref-def
+${1:tpl}: &$1
+	${2:key: value}
+endsnippet
+
+snippet yaml-ref-use
+<<: *${1:tpl}
+endsnippet

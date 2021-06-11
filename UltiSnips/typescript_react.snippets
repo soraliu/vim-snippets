@@ -1,13 +1,32 @@
 priority -50
 
 snippet react-component-tpl
-import React, { FC } from 'react';
+// deps
+import React, { FC, useState, useEffect } from 'react'
+
+// global variables
+
+// global functions
+
+// ui components
+
+// type definitions
 
 const ${1}: FC = () => {
-	return <div>
-		${2:$1}
-	</div>;
-};
+	// use hooks
+	const [${3:state}, set${3}] = useState(null)
 
-export default $1;
+	// local variables
+
+	// local functions
+
+	// effects
+	useEffect(() => {}, [])
+
+	return <>
+		${2:$1}
+	</>
+}
+
+export default $1
 endsnippet

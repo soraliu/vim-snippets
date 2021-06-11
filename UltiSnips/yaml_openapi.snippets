@@ -59,27 +59,49 @@ snippet openapi-ref-to-responses
 $ref: '#/components/responses/$1'
 endsnippet
 
+snippet openapi-media-application-json
+application/json:
+	schema:
+		$0
+endsnippet
+
+snippet openapi-schema-with-string
+${1:schema}:${2:
+	description: }
+	type: string
+	example: $0a string
+endsnippet
+
+snippet openapi-schema-with-array-string
+${1:schema}:${2:
+	description: }
+	type: array
+	items:
+		type: string$0
+endsnippet
+
+snippet openapi-schema-with-array-object
+${1:schema}:${2:
+	description: }
+	type: array
+	items:
+		type: object
+		properties:
+			$0id:
+				type: integer
+				format: int64
+endsnippet
+
 snippet openapi-schema-with-object
-$0schema:
-	description: $1
-	type: object
+$0${1:schema}:${2:
+	description: }
+	type: object${3:
 	required:
-		- content
+		- $4}
 	properties:
-		id:
+		${4:id}:
 			type: integer
 			format: int64
-		content:
-			type: string
-			example: a string
-		created_at:
-			type: string
-			format: date-time
-		status:
-			type: string
-			enum:
-				- created
-				- finished
 endsnippet
 
 snippet openapi-schema-with-ref
@@ -162,37 +184,37 @@ endsnippet
 snippet openapi-operation-tpl
 $0${1:get}:
 	tags:
-		- ${4}
-	summary: $2
-	operationId: $3
+		- ${2}${3:
+	summary: }${4:
+	operationId: }${5:
 	parameters:
 		- name: id
 			in: path
 			required: true
 			schema:
 				type: integer
-				format: int64
+				format: int64}
 	requestBody:
-		$ref: '#/components/requestBodies/$4'
+		$ref: '#/components/requestBodies/$6'
 	responses:
 		200:
 			description: Successful Operation
 			content:
 				application/json:
 					schema:
-						$ref: '#/components/schemas/${4}'
+						$ref: '#/components/schemas/$9'${7:
 		201:
 			description: Successful Creation
 			content:
 				application/json:
 					schema:
-						$ref: '#/components/schemas/${4}'
+						$ref: '#/components/schemas/${9}'}${8:
 		202:
 			description: Successful Async Operation
 			content:
 				application/json:
 					schema:
-						$ref: '#/components/schemas/${4}'
+						$ref: '#/components/schemas/${9}'}
 endsnippet
 
 snippet openapi-components-tpl
@@ -280,4 +302,33 @@ components:
 					type: object
 				msg:
 					type: string
+endsnippet
+
+snippet openapi-components-responses-tpl
+${1:User}:
+	description: Successful Operation
+	content:
+		application/json:
+			schema:
+				type: object
+				allOf:
+					- $ref: '#/components/schemas/APIResponse'
+					- type: object
+						properties:
+							data:
+								$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
+${1/\w+\s*/\u$0/}Array:
+	description: Successful Operation
+	content:
+		application/json:
+			schema:
+				type: object
+				allOf:
+					- $ref: '#/components/schemas/APIResponse'
+					- type: object
+						properties:
+							data:
+								type: array
+								items:
+									$ref: '#/components/schemas/${1/\w+\s*/\u$0/}'
 endsnippet

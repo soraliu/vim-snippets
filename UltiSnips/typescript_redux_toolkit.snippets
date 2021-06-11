@@ -1,0 +1,58 @@
+priority -50
+
+snippet redux-toolkit-slice-tpl
+import { createSlice, PayloadAction, createAsyncThunk } from '${1:@reduxjs/toolkit}'
+
+export const ${2:fetchApi} = createAsyncThunk('${3:module}', async () => {
+	return []
+})
+
+export interface State {
+	${4:list}: any
+}
+
+// Define the initial state using that type
+const initialState: State = {
+	$4: []
+}
+
+const $3Slice = createSlice({
+	name: '$3',
+	initialState,
+	reducers: {
+		save: (state, { payload }: PayloadAction<any>) => {
+			state.$4 = payload
+		},
+	},
+	extraReducers: builder => {
+		builder.addCase(getList.fulfilled, (state, { payload }) => {
+			state.$4 = payload
+		})
+	}
+})
+
+export const actions = $3Slice.actions
+
+export default $3Slice.reducer
+endsnippet
+
+snippet redux-toolkit-effect-tpl
+import { createAsyncThunk } from '../toolkit';
+import { AppAsyncThunkConfig } from '../store';
+
+export const ${1:fn} = createAsyncThunk<void, ${2:void}, AppAsyncThunkConfig>(${3:'path/to/module'}, async (${4:args}, { getState, dispatch }) => {
+	${5:dispatch()}
+})
+endsnippet
+
+snippet redux-toolkit-thunk-item
+export const ${1:fn} = createAsyncThunk<void, ${2:void}, AppAsyncThunkConfig>(${3:'path/to/module'}, async (${4:args}, { getState, dispatch }) => {
+	${5:dispatch()}
+})
+endsnippet
+
+snippet redux-toolkit-slice-reducer
+${1:reducerName}: (state, { payload }: PayloadAction<${2:string}>) => {
+	${3:state.}
+},
+endsnippet
