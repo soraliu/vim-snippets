@@ -8,6 +8,8 @@ snippet imas "import * as xyz from 'xyz'"
 	import * as ${2:$1} from '${1}';
 snippet imm "import { member } from 'xyz'"
 	import { ${2} } from '${1}';
+snippet exm "export { Module } from 'xyz'"
+	export { ${2} } from '${1}';
 snippet edm "export { default as member } from 'xyz'"
 	export { default as ${2} } from '${1}';
 snippet cla

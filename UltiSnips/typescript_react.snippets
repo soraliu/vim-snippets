@@ -2,7 +2,10 @@ priority -50
 
 snippet react-component-tpl
 // deps
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
+
+// type definitions
+type Props = {}
 
 // global variables
 
@@ -10,18 +13,15 @@ import React, { FC, useState, useEffect } from 'react'
 
 // ui components
 
-// type definitions
-
-const ${1}: FC = () => {
+const ${1}: FC<Props> = () => {
 	// use hooks
-	const [${3:state}, set${3}] = useState(null)
+	const [${3/\w+\s*/\l$0/}, set${3:State}] = useState(null)
 
 	// local variables
 
 	// local functions
 
 	// effects
-	useEffect(() => {}, [])
 
 	return <>
 		${2:$1}

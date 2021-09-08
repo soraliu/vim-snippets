@@ -1,5 +1,13 @@
 priority -50
 
+snippet react-use-state
+const [${1/\w+\s*/\l$0/}, set${1:State}] = useState(${2})
+endsnippet
+
+snippet <>
+<>$0</>
+endsnippet
+
 # react
 snippet react-import-react "React"
 import React from 'react';
