@@ -5,7 +5,7 @@ snippet react-component-tpl
 import React, { FC, useState } from 'react'
 
 // type definitions
-type Props = {}
+export type Props = {}
 
 // global variables
 
@@ -14,8 +14,10 @@ type Props = {}
 // ui components
 
 const ${1}: FC<Props> = () => {
-	// use hooks
+	// use state
 	const [${3/\w+\s*/\l$0/}, set${3:State}] = useState(null)
+
+	// use data
 
 	// local variables
 
@@ -29,4 +31,30 @@ const ${1}: FC<Props> = () => {
 }
 
 export default $1
+endsnippet
+
+snippet react-api-hook-tpl
+import { canalGet } from '@bytecloud/cicd'
+import { useQuery } from 'react-query'
+
+export const REQ_URL = '/api/v1/gitlab/branch/search'
+
+export type Req = {}
+
+export type Res = {}
+
+export async function ${1}(params: Req): Promise<Res> {
+	// do some precheck
+	// if (!params) return null
+
+	const data = await canalGet(REQ_URL, params)
+
+	return data?.data || []
+}
+
+export function use${1/\w+\s*/\u$0/}(params: Req) {
+	return useQuery([REQ_URL], () =>
+		$1(params)
+	)
+}
 endsnippet
