@@ -35,9 +35,9 @@ endsnippet
 
 snippet react-api-hook-tpl
 import { canalGet } from '@bytecloud/cicd'
-import { useQuery } from 'react-query'
+import { useQuery, QueryOptions } from 'react-query'
 
-export const REQ_URL = '/api/v1/gitlab/branch/search'
+export const REQ_URL = '${2}'
 
 export type Req = {}
 
@@ -52,9 +52,10 @@ export async function ${1}(params: Req): Promise<Res> {
 	return data?.data || []
 }
 
-export function use${1/\w+\s*/\u$0/}(params: Req) {
+export function use${1/\w+\s*/\u$0/}(params: Req, options: QueryOptions) {
 	return useQuery([REQ_URL], () =>
-		$1(params)
+		$1(params),
+		options
 	)
 }
 endsnippet
