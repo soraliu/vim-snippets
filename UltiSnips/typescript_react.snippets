@@ -52,7 +52,7 @@ export async function ${1}(params: Req): Promise<Res> {
 	return data?.data || []
 }
 
-export function use${1/\w+\s*/\u$0/}(params: Req, options: QueryOptions) {
+export function use${1/\w+\s*/\u$0/}(params: Req, options?: QueryOptions) {
 	return useQuery([REQ_URL], () =>
 		$1(params),
 		options
