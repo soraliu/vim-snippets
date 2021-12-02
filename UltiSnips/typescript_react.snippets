@@ -35,7 +35,7 @@ endsnippet
 
 snippet react-api-hook-tpl
 import { canalGet } from '@bytecloud/cicd'
-import { useQuery, QueryOptions } from 'react-query'
+import { useQuery, UseQueryOptions } from 'react-query'
 
 export const REQ_URL = '${2}'
 
@@ -52,7 +52,7 @@ export async function ${1}(params: Req): Promise<Res> {
 	return data?.data || []
 }
 
-export function use${1/\w+\s*/\u$0/}(params: Req, options?: QueryOptions) {
+export function use${1/\w+\s*/\u$0/}(params: Req, options?: UseQueryOptions<Res>) {
 	return useQuery([REQ_URL], () =>
 		$1(params),
 		options
