@@ -20,3 +20,28 @@ snippet tsconfig-json-umi "umi's tsconfig"
 	}
 }
 endsnippet
+
+snippet tsconfig-json-base "base tsconfig"
+{
+	"compilerOptions": {
+		"strict": true,
+		"target": "es5",
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"jsx": "react",
+		"lib": [
+			"ES2015",
+			"ES2016",
+			"ES2017",
+			"ES2018",
+			"ES2019",
+			"ES2020",
+			"ES2021",
+			"ESNext",
+			"DOM"
+		],
+		"types": ["jest", "node"]
+	}
+}
+endsnippet
