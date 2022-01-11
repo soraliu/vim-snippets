@@ -1,0 +1,19 @@
+# Snippet for tsconfig
+
+priority -50
+
+snippet json-package-lib "package.json of npm library"
+{
+	"name": "${1}",
+	"version": "0.0.1",
+	"description": "",
+	"main": "dist/cjs/index.js",
+	"module": "dist/esm/index.js",
+	"types": "dist/types/index.d.ts",
+	"author": "soraliu <soraliu.dev@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"build": "echo building"
+	}
+}
+endsnippet
