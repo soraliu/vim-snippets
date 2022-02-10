@@ -30,20 +30,13 @@ snippet tsconfig-json-base "base tsconfig"
 		"module": "ES2020",
 		"moduleResolution": "Node",
 		"allowSyntheticDefaultImports": true,
+		// the ES6 modules spec states that a namespace import (import * as x) can only be an object
 		"esModuleInterop": true,
+		// all implementation files must be modules
 		"isolatedModules": true,
 		"jsx": "react",
-		"lib": [
-			"ES2015",
-			"ES2016",
-			"ES2017",
-			"ES2018",
-			"ES2019",
-			"ES2020",
-			"ES2021",
-			"ESNext",
-			"DOM"
-		],
+		"lib": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020", "ES2021", "ESNext", "DOM"],
+		// if types is specified, only packages listed will be included in the global scope
 		"types": ["node"]
 	},
 	"include": ["**/*"],
