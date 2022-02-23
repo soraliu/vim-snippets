@@ -1,0 +1,23 @@
+priority -50
+
+snippet use-query-tpl "react query -- use query"
+import { useQuery } from 'react-query'
+
+export const use${1} = (...args) => {
+	return useQuery(['key'], async () => {
+		const res = await Promise.resolve(...args)
+		return res
+	});
+};
+endsnippet
+
+snippet use-mutation-tpl "react query -- use mutation"
+import { useMutation } from 'react-query'
+
+export const use${1} = () => {
+	return useMutation(async (...args) => {
+		const res = await Promise.resolve(...args)
+		return res
+	});
+};
+endsnippet
