@@ -24,20 +24,49 @@ endsnippet
 snippet tsconfig-json-base "base tsconfig"
 {
 	"compilerOptions": {
+		// Type Checking
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"noUnusedLocals": false,
+		"noUnusedParameters": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
 		"strict": true,
-		"outDir": "dist/esm",
-		"target": "ES5",
+
+		// Module
 		"module": "ES2020",
 		"moduleResolution": "Node",
+		"resolveJsonModule": true,
+		"rootDir": ".",
+		"types": ["node"], // if types is specified, only packages listed will be included in the global scope
+
+		// Emit
+		"declaration": true,
+		"declarationDir": "dist/types",
+		"importHelpers": true,
+		"outDir": "dist/esm",
+		"removeComments": false,
+		"sourceMap": true,
+
+		// Interop Constraints
 		"allowSyntheticDefaultImports": true,
-		// the ES6 modules spec states that a namespace import (import * as x) can only be an object
-		"esModuleInterop": true,
-		// all implementation files must be modules
-		"isolatedModules": true,
-		"jsx": "react",
+		"esModuleInterop": true, // the ES6 modules spec states that a namespace import (import * as x) can only be an object
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true, // all implementation files must be modules
+		"preserveSymlinks": true,
+
+		// Language and Environment
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"jsx": "react-jsx", // React >= 17
 		"lib": ["ES2015", "ES2016", "ES2017", "ES2018", "ES2019", "ES2020", "ES2021", "ESNext", "DOM"],
-		// if types is specified, only packages listed will be included in the global scope
-		"types": ["node"]
+		"target": "ES5",
+
+		// Completeness
+		"skipLibCheck": true,
+
+		// Output Formatting
+		"pretty": true
 	},
 	"include": ["**/*"],
 	"ts-node": {
