@@ -37,14 +37,14 @@ snippet tsconfig-json-base "base tsconfig"
 		"module": "ES2020",
 		"moduleResolution": "Node",
 		"resolveJsonModule": true,
-		"rootDir": ".",
 		"types": ["node"], // if types is specified, only packages listed will be included in the global scope
 
 		// Emit
 		"declaration": true,
+		"baseUrl": ".",
 		"declarationDir": "dist/types",
-		"importHelpers": true,
 		"outDir": "dist/esm",
+		"importHelpers": true,
 		"removeComments": false,
 		"sourceMap": true,
 
@@ -75,5 +75,17 @@ snippet tsconfig-json-base "base tsconfig"
 			"module": "CommonJS"
 		}
 	}
+}
+endsnippet
+
+snippet tsconfig-json-base-extend "extend base tsconfig"
+{
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"declarationDir": "dist/types",
+		"outDir": "dist/esm"
+	},
+	"include": ["**/*"]
 }
 endsnippet
