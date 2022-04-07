@@ -17,13 +17,21 @@ snippet json-package-lib "package.json of npm library"
 		"type": "git",
 		"url": "https://github.com/soraliu"
 	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org",
+		"tag": "latest"
+	},
+	"files": [
+		"/dist"
+	],
+	"browserslist": [
+		"cover 99.9%"
+	],
 	"scripts": {
 		"start": "echo start",
 		"build": "echo build"
-	},
-	"browserslist": [
-		"cover 99.9%"
-	]
+	}
 }
 endsnippet
 
@@ -42,13 +50,21 @@ snippet json-package-node "package.json of node library"
 		"type": "git",
 		"url": "https://github.com/soraliu"
 	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org",
+		"tag": "latest"
+	},
+	"files": [
+		"/dist"
+	],
+	"browserslist": [
+		"cover 99.9%"
+	],
 	"scripts": {
 		"start": "echo start",
 		"build": "echo build"
 	},
-	"browserslist": [
-		"cover 99.9%"
-	],
 	"dependencies": {},
 	"devDependencies": {
 		"@types/node": "^17.0.1",
