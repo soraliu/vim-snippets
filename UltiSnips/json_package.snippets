@@ -25,9 +25,18 @@ snippet json-package-lib "package.json of npm library"
 	"files": [
 		"/dist"
 	],
-	"browserslist": [
-		"cover 99.9%"
-	],
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 	"scripts": {
 		"start": "echo start",
 		"build": "echo build"
@@ -58,9 +67,18 @@ snippet json-package-node "package.json of node library"
 	"files": [
 		"/dist"
 	],
-	"browserslist": [
-		"cover 99.9%"
-	],
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 	"scripts": {
 		"start": "echo start",
 		"build": "echo build"
