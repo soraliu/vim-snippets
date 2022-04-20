@@ -1,0 +1,35 @@
+priority -50
+
+snippet bmp-component-tpl
+// deps
+import { View } from '@binance/mp-components'
+import React, { FC, useState } from 'react'
+
+// type definitions
+export type Props = {}
+
+// global variables
+
+// global functions
+
+// ui components
+
+const ${1}: FC<Props> = () => {
+	// use state
+	const [${3/\w+\s*/\l$0/}, set${3:State}] = useState(null)
+
+	// use data
+
+	// local variables
+
+	// local functions
+
+	// effects
+
+	return <View>
+		${2:$1}
+	</View>
+}
+
+export default $1
+endsnippet
