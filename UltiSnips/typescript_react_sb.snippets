@@ -1,0 +1,29 @@
+priority -50
+
+snippet sb-stories-tpl
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+
+import { ${1} } from '.'
+
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+	title: 'Components/$1',
+	component: $1,${2:
+	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+	argTypes: {
+		bg: {
+			control: 'color',
+		},
+	},
+}} as ComponentMeta<typeof $1>
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof $1> = (args: any) => <$1 {...args} />
+
+export const Primary = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+Primary.args = {
+	children: 'Hi',
+}
+endsnippet

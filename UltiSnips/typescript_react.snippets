@@ -2,7 +2,7 @@ priority -50
 
 snippet react-component-tpl
 // deps
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 // type definitions
 export type Props = {}
@@ -15,7 +15,6 @@ export type Props = {}
 
 const ${1}: FC<Props> = () => {
 	// use state
-	const [${3/\w+\s*/\l$0/}, set${3:State}] = useState(null)
 
 	// use data
 
