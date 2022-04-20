@@ -15,15 +15,15 @@ export default {
 		bg: {
 			control: 'color',
 		},
-	},
-}} as ComponentMeta<typeof $1>
+	},}
+} as ComponentMeta<typeof $1>
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof $1> = (args: any) => <$1 {...args} />
 
-export const Primary = Template.bind({})
+export const Default = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-	children: 'Hi',
+Default.args = {
+	$0
 }
 endsnippet
