@@ -2,12 +2,10 @@ priority -50
 
 snippet react-component-tpl
 // deps
-import React, { FC } from 'react'
+import React, { type FC } from 'react'
 
 // type definitions
-export interface Props {
-	style: React.CSSProperties
-}
+export type Props = Record<string, unknown>
 
 // global variables
 
