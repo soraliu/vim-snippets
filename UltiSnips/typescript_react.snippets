@@ -33,7 +33,6 @@ export default $1
 endsnippet
 
 snippet react-api-hook-tpl
-import { canalGet } from '@bytecloud/cicd'
 import { useQuery, UseQueryOptions } from 'react-query'
 
 export const REQ_URL = '${2}'
@@ -46,7 +45,7 @@ export async function ${1}(params: Req): Promise<Res> {
 	// do some precheck
 	// if (!params) return null
 
-	const data = await canalGet(REQ_URL, params)
+	const data = await Promise.resolve([])
 
 	return data?.data || []
 }
