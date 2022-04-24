@@ -15,6 +15,8 @@ export type Props = Record<string, unknown>
 // ui components
 
 const ${1}: FC<Props> = () => {
+	// precheck
+
 	// use state
 
 	// use data
@@ -25,9 +27,48 @@ const ${1}: FC<Props> = () => {
 
 	// effects
 
+	// flow control
+
 	return <View>
 		${2:$1}
 	</View>
+}
+
+export default $1
+endsnippet
+
+snippet openbmp-react-component-tpl
+// deps
+import React, { type FC } from 'react'
+import { Box } from '..'
+
+// type definitions
+export type Props = Record<string, unknown>
+
+// global variables
+
+// global functions
+
+// ui components
+
+const ${1}: FC<Props> = () => {
+	// precheck
+
+	// use state
+
+	// use data
+
+	// local variables
+
+	// local functions
+
+	// effects
+
+	// flow control
+
+	return <Box>
+		${2:$1}
+	</Box>
 }
 
 export default $1

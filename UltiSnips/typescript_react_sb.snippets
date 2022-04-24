@@ -18,6 +18,30 @@ export default {
 	},}
 } as ComponentMeta<typeof $1>
 
+// More on component: https://storybook.js.org/docs/react/writing-stories/introduction
+export const Basis: ComponentStory<typeof $1> = () => {
+	return <$1 />
+}
+endsnippet
+
+snippet sb-multi-stories-tpl
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+
+import { ${1} } from '.'
+
+// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+export default {
+	title: 'Components/$1',
+	component: $1,${2:
+	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+	argTypes: {
+		bg: {
+			control: 'color',
+		},
+	},}
+} as ComponentMeta<typeof $1>
+
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof $1> = (args: any) => {
 	return <$1 {...args} />
