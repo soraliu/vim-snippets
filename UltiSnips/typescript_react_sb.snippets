@@ -3,30 +3,52 @@ priority -50
 snippet sb-stories-tpl
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import React from 'react'
-import { ${1} } from '.'
+import { ${2} } from '${1}'
 
-type $1Type = typeof $1
-type $1Props = Parameters<$1Type>[0]
+type $2Type = typeof $2
+type $2Props = Parameters<$2Type>[0]
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-	title: '${2:Components}/$1',
-	component: $1,${3:
-	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+	title: '${3:Components}/${4:$2}',
+	component: $2,${5:
 	argTypes: {
 		bg: {
 			control: 'color',
 		},
 	},}
-} as ComponentMeta<$1Type>
+} as ComponentMeta<$2Type>
 
-// More on component: https://storybook.js.org/docs/react/writing-stories/introduction
-export const Basis: ComponentStory<$1Type> = (args: $1Props) => {
-	return <$1 {...args} />
+export const Basis: ComponentStory<$2Type> = (args: $2Props) => {
+	return <$2 {...args} />
 }
 Basis.args = {
 	$0
-} as $1Props
+} as $2Props
+endsnippet
+
+snippet sb-default-stories-tpl
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import React from 'react'
+import ${2} from '${1}'
+
+type $2Type = typeof $2
+
+export default {
+	title: '${3:Components}/${4:$2}',
+	component: $2,${5:
+	argTypes: {
+		bg: {
+			control: 'color',
+		},
+	},}
+} as ComponentMeta<$2Type>
+
+export const Basis: ComponentStory<$2Type> = () => {
+	return <$2 />
+}
+Basis.args = {
+	$0
+}
 endsnippet
 
 snippet sb-multi-stories-tpl
