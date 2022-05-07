@@ -6,7 +6,6 @@ import React from 'react'
 import { ${2} } from '${1}'
 
 type $2Type = typeof $2
-type $2Props = Parameters<$2Type>[0]
 
 export default {
 	title: '${3:Components}/${4:$2}',
@@ -18,12 +17,12 @@ export default {
 	},}
 } as ComponentMeta<$2Type>
 
-export const Basis: ComponentStory<$2Type> = (args: $2Props) => {
+export const Basis: ComponentStory<$2Type> = (args) => {
 	return <$2 {...args} />
 }
 Basis.args = {
 	$0
-} as $2Props
+}
 endsnippet
 
 snippet sb-default-stories-tpl
@@ -43,42 +42,64 @@ export default {
 	},}
 } as ComponentMeta<$2Type>
 
-export const Basis: ComponentStory<$2Type> = () => {
-	return <$2 />
+export const Basis: ComponentStory<$2Type> = (args) => {
+	return <$2 {...args} />
 }
 Basis.args = {
 	$0
 }
+endsnippet
+
+snippet sb-json-hook-stories-tpl
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import React from 'react'
+import ReactJson from 'react-json-view'
+import { ${2} } from '${1}'
+
+type ReactJsonType = typeof ReactJson
+
+export default {
+	title: '${3:Hooks}/${4:$2}',
+	component: ReactJson,${5:
+	parameters: {
+		viewport: {
+			defaultViewport: 'reset',
+		},
+	},}
+} as ComponentMeta<ReactJsonType>
+
+export const Basis: ComponentStory<ReactJsonType> = () => {
+	const data = $2()
+
+	return <ReactJson src={data || {}} collapsed={1} />
+}
+Basis.args = {}
 endsnippet
 
 snippet sb-multi-stories-tpl
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import React from 'react'
-import { ${1} } from '.'
+import { ${2} } from '${1}'
 
-type $1Type = typeof $1
-type $1Props = Parameters<$1Type>[0]
+type $2Type = typeof $2
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-	title: 'Components/$1',
-	component: $1,${2:
-	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+	title: '${3:Components}/${4:$2}',
+	component: $2,${5:
 	argTypes: {
 		bg: {
 			control: 'color',
 		},
 	},}
-} as ComponentMeta<$1Type>
+} as ComponentMeta<$2Type>
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<$1Type> = (args: $1Props) => {
-	return <$1 {...args} />
+const Template: ComponentStory<$2Type> = (args) => {
+	return <$2 {...args} />
 }
 
 export const Basis = Template.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Basis.args = {
 	$0
-} as $1Props
+}
 endsnippet
+
