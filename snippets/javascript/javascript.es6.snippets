@@ -11,7 +11,7 @@ snippet imm "import { member } from 'xyz'"
 snippet exm "export { Module } from 'xyz'"
 	export { ${2} } from '${1}';
 snippet exd "export { default as member } from 'xyz'"
-	export { default as ${2} } from '${1}';
+	export { default as ${2}${3:, type Props as $2Props} } from '${1}';
 snippet cla
 	class ${1} {
 		${0:${VISUAL}}

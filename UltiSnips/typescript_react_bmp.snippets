@@ -41,11 +41,13 @@ snippet openbmp-react-component-tpl
 // deps
 import React, { type FC } from 'react'
 import { Box, type BoxProps } from '..'
+import './$1.scss'
 
 // type definitions
 export type Props = BoxProps
 
 // global variables
+const CLASS_PREFIX = 'openbmp-${1/\w+\s*/\l$0/}'
 
 // global functions
 
@@ -66,7 +68,7 @@ const ${1}: FC<Props> = () => {
 
 	// flow control
 
-	return <Box>
+	return <Box className={CLASS_PREFIX}>
 		${2:$1}
 	</Box>
 }

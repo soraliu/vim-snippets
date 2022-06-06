@@ -85,9 +85,11 @@ snippet tsconfig-json-base-extend "extend base tsconfig"
 	"compilerOptions": {
 		"baseUrl": "./src",
 		"declarationDir": "dist/types",
+		"emitDeclarationOnly": true,
 		"outDir": "dist/esm"
 	},
-	"include": ["**/*"]
+	"include": ["./src/**/*", "../../global.d.ts"],
+	"exclude": ["./dist"]
 }
 endsnippet
 
